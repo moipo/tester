@@ -1,0 +1,59 @@
+{% extends "createtest_base.html" %}
+
+{% block questions_form %}
+
+ <form action = "" method="POST"> {% csrf_token %}
+     <div class="form-group testformtxt">
+         <textarea class ="form-control"  name="question" cols="40" rows="10" required="" id="id_question" placeholder = "Текст вопроса"></textarea>
+<!--         <div class = 'container'>-->
+         <label class = "textstyle" for = "id_importance">Значимость вопроса (баллов за верный ответ от 1 до 10):</label>
+         <input class ="form-control questionform_importance" min = "1" max = "10" type="number" name="importance" value="5" required="" id="id_importance" >
+         <button type="submit" class="btn btn-success btn-md createTestButton"> Продолжить</button>
+<!--         </div>-->
+         {% comment %}
+        {{question_form}}
+         {% endcomment %}
+     </div>
+ </form>
+
+<style>
+        .testformstr{
+        margin-top: 50px;
+        width:300px;
+        margin-left: 500px;
+        }
+
+        .testformtxt{
+        margin-top: 30px;
+        width:700px;
+        margin-left: 500px;
+
+        }
+
+        .questionform_importance
+        {
+        display: inline-block; 
+        margin-left: 700px;
+        width:100px;
+        margin: 0px;
+        }
+
+
+        .createTestButton{
+        margin-top: 35px;
+        float:right;
+        }
+
+        .textstyle{
+        color:white;
+        margin-top: 30px;
+        font-size: 22px;
+        }
+
+
+</style>
+{% endblock %}
+
+
+{% block answer%}
+{% endblock%}
