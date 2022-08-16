@@ -8,3 +8,8 @@ class TestForm(forms.ModelForm):
             'title',
             'description',
         ]
+
+        labels = {
+            "title" : "Название теста",
+            "description" : "Описание",
+        }
