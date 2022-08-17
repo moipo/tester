@@ -2,6 +2,16 @@
 
 {% block questions_form %}
 
+
+<!--<form action="" method="POST"> {% csrf_token %}-->
+<!--    <div class='form-group testformtxt'>-->
+
+<!--        {% question_form %}-->
+<!--        <button type="submit" class="btn btn-success btn-md createTestButton"> Продолжить</button>-->
+<!--    </div>-->
+<!--</form>-->
+
+
  <form action = "" method="POST"> {% csrf_token %}
      <div class="form-group testformtxt">
          <textarea class ="form-control"  name="question" cols="40" rows="10" required="" id="id_question" placeholder = "Текст вопроса"></textarea>
@@ -15,6 +25,9 @@
          {% endcomment %}
      </div>
  </form>
+<form action="add_answer">
+
+</form>
 
 <style>
         .testformstr{
@@ -32,7 +45,7 @@
 
         .questionform_importance
         {
-        display: inline-block; 
+        display: inline-block;
         margin-left: 700px;
         width:100px;
         margin: 0px;
@@ -49,6 +62,7 @@
         margin-top: 30px;
         font-size: 22px;
         }
+
 
 
 </style>

@@ -12,7 +12,7 @@ class Answer(models.Model):
 
 
 class Question(models.Model):
-    question = models.TextField()
+    question = models.TextField(default = "")
     importance = models.IntegerField(default = 5, validators=[
         MaxValueValidator(10),
         MinValueValidator(1),

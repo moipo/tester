@@ -26,3 +26,11 @@ class QuestionForm(forms.ModelForm):
             "question" : "Текст вопроса",
             "importance" : "Очков за вопрос (важность вопроса)",
         }
+
+class AnswerForm(forms.ModelForm):
+    class Meta:
+        model = Answer
+        fields = [
+            'answer',
+            'is_right',
+        ]
