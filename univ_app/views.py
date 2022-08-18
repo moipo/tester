@@ -17,10 +17,12 @@ class General:
             if form_result.is_valid():
                 # Test.objects.create(**form_result.cleaned_data)
                 # return redirect('create_question')
-                result = form_result.save()
+                model_instance = form_result.save()
                 # return redirect(result)
                 # return render(request, 'createquestions_form', {})
-                return redirect('newquestions')
+                print(model_instance.pk)
+                # print(Test.objects.filter(request))
+                return redirect('newquestions',model_instance.pk)
 
 
         form_test = TestForm()
@@ -29,7 +31,7 @@ class General:
         }
         return render(request, "createtest_form.html", ctx)
 
-    def createquestions_form(request):
+    def createquestions_form(request, testid):
         if request.method == "POST":
             question_form = AnswerForm
         question_form = QuestionForm()
