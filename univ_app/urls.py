@@ -3,10 +3,10 @@ from .views import *
 
 urlpatterns = [
     path('',General.base),
-    path('createtest/',General.createtest_form, name = 'createtest'),
-    path('createtest/<int:testid>/create_questions/',General.createquestion_form, name = "createtest"),
-    path('add_answer/', General.add_answer, name = 'add_answer'),
+    path('newtest/',General.createtest_form, name = 'newtest'),
+    path('newtest/create_questions/',General.createquestions_form, name = "newquestions"),
+    # path('add_answer/', General.add_answer, name = 'add_answer'),
 ]
-
+# <int:testid>
 # как конструируется паттерн
 # как сделать аргумент опциональным

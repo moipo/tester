@@ -1,38 +1,108 @@
-from collections import deque
 
-class ListNode(object):
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
+arr=  [3,45,6,5,6,4,3,7,2,3,4,6,2,2]
 
-    def __str__(self):
-        return str(self.val)
+length =len(arr)
+i = 0
+while i < length:
+    arr.pop()
+    i+=1
+    length -=1
+    print(arr[i])
+
+text = "asdf"
+text.isu
+[text[i+1].upper() if text[i] =='-' else text[i] for i in range(len(text))]
 
 
 
-arr = deque([4,5,6,3,4,4,2,6,12,3,4,51,6,9])
 
 
 
 
-#1) поместить всё в список
-#2) считать всё из списка.
 
-arr_of_nodes = []
-def create_linked_list(arr:deque):
-    if len(arr) == 1:
-        return ListNode()
-    new_node = ListNode(arr.popleft(), create_linked_list(arr))
-    arr_of_nodes.append(new_node)
-    return new_node
 
-create_linked_list(arr)
 
-first_node = arr_of_nodes[0]
-# print(arr_of_nodes)
-arr_of_nodes.reverse()
-for node in arr_of_nodes:
-    print(node.val, node.next.val)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# success
+# class ListNode(object):
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+#
+#     def __str__(self):
+#         return str(self.val)
+#
+#
+#
+# arr = deque([4,5,6,3,4,4,2,6,12,3,4,51,6,9])
+#
+#
+#
+#
+# #1) поместить всё в список
+# #2) считать всё из списка.
+#
+# arr_of_nodes = []
+# def create_linked_list(arr:deque):
+#     if len(arr) == 1:
+#         return ListNode()
+#     new_node = ListNode(arr.popleft(), create_linked_list(arr))
+#     arr_of_nodes.append(new_node)
+#     return new_node
+#
+# create_linked_list(arr)
+#
+# first_node = arr_of_nodes[0]
+# # print(arr_of_nodes)
+# arr_of_nodes.reverse()
+# for node in arr_of_nodes:
+#     print(node.val, node.next.val)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # def show_linked_list(node:ListNode):
 #     print(show_linked_list(node.next))

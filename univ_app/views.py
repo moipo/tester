@@ -11,15 +11,16 @@ class General:
     def base(request):
         return render(request, "very_first_page.html", {})
 
-    def createtest_form(request,testid = -1):
-        print(testid)
+    def createtest_form(request):
         if request.method == "POST":
             form_result = TestForm(request.POST)
             if form_result.is_valid():
                 # Test.objects.create(**form_result.cleaned_data)
                 # return redirect('create_question')
                 result = form_result.save()
-                return redirect(result)
+                # return redirect(result)
+                # return render(request, 'createquestions_form', {})
+                return redirect('newquestions')
 
 
         form_test = TestForm()
@@ -28,7 +29,7 @@ class General:
         }
         return render(request, "createtest_form.html", ctx)
 
-    def createquestion_form(request, testid):
+    def createquestions_form(request):
         if request.method == "POST":
             question_form = AnswerForm
         question_form = QuestionForm()
