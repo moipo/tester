@@ -19,15 +19,15 @@
 <!--         <div class = 'container'>-->
          <label class = "textstyle" for = "id_importance">Значимость вопроса (баллов за верный ответ от 1 до 10):</label>
          <input class ="form-control questionform_importance" min = "1" max = "10" type="number" name="importance" value="5" required="" id="id_importance" >
-         <button type="submit" class="btn btn-success btn-md createTestButton"> Продолжить</button>
+         <button type="submit" class="btn btn-success btn-md createTestButton"> Добавить вопрос</button>
 <!--         </div>-->
          {% comment %}
         {{question_form}}
          {% endcomment %}
      </div>
  </form>
-<form action="add_answer">
-
+<form action="{% url 'geturl' %}">
+  <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
 </form>
 
 <style>
@@ -64,11 +64,26 @@
         font-size: 22px;
         }
 
+        .finish{
+          position: fixed;
+          right: 450px;
+          bottom: 100px;
+          background-color: red;
+        }
+
 
 
 </style>
 {% endblock %}
 
 
+
 {% block answer%}
+some text and form:
+{{answer_form.as_p}} {% csrf_token %}
+
+
+
+
+
 {% endblock%}

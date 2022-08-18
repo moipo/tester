@@ -34,16 +34,22 @@ class General:
     def createquestions_form(request, testid):
         if request.method == "POST":
             question_form = AnswerForm
+
+        answer_form = AnswerForm()
         question_form = QuestionForm()
         ctx = {
             'question_form' : question_form,
+            'answer_form' : answer_form,
         }
         return render(request, "createquestions_form.html", ctx)
 
-    def add_answer(request):
+    def geturl(request):
+        return render(request,"geturl.html",{})
 
-        Answer.objects.create()
-        ctx = {
-            'question_form' : question_form,
-        }
-        return render(request, "createquestions_form.html", ctx)
+    # def add_answer(request):
+    #
+    #     Answer.objects.create()
+    #     ctx = {
+    #         'question_form' : question_form,
+    #     }
+    #     return render(request, "createquestions_form.html", ctx)
