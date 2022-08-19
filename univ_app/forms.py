@@ -32,10 +32,10 @@ class AnswerForm(forms.ModelForm):
         super().__init__(*args, **kwargs) #parent class
         self.fields['answer'].widget.attrs.update(
         {'class': 'form-control',
-         'style':'width:400px; height:25px;  display:inline-block;',
+         'style':' placeholder : "Вопрос"; width:700px; height:25px;  display:inline-block;',
          })
         self.fields['is_right'].widget.attrs.update({'class': 'form-check-input',
-        "style": "display:inline-block;"})
+        "style": " display:inline-block;"})
 
     class Meta:
         model = Answer
@@ -43,6 +43,8 @@ class AnswerForm(forms.ModelForm):
             'answer',
             'is_right',
         ]
-        widgets = {
 
+        labels = {
+            "is_right" : "Ответ является правильным ",
+            'answer': "Ответ",
         }

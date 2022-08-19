@@ -8,7 +8,7 @@ class Answer(models.Model):
     answer = models.CharField(max_length=1000)
     was_chosen = models.BooleanField(default=False)
     is_right = models.BooleanField(default=False)
-    related_question = models.ForeignKey("Question", on_delete=models.PROTECT)
+    related_question = models.ForeignKey("Question", on_delete=models.PROTECT, null = True)
 
 
 class Question(models.Model):
@@ -17,7 +17,7 @@ class Question(models.Model):
         MaxValueValidator(10),
         MinValueValidator(1),
     ])
-    related_test = models.ForeignKey("Test", on_delete=models.CASCADE)
+    related_test = models.ForeignKey("Test", on_delete=models.CASCADE, null=True )
     answered_correctly = models.BooleanField(default = False)
 
 class Test(models.Model):

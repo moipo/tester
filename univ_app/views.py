@@ -33,8 +33,24 @@ class General:
 
     def createquestions_form(request, testid):
         if request.method == "POST":
-            question_form = AnswerForm
-
+            question_form = QuestionForm(request.POST)
+            answer1_form = AnswerForm(request.POST)
+            answer2_form = AnswerForm(request.POST)
+            print("it's ok 2")
+            if all([question_form.is_valid(), answer1_form.is_valid(), answer2_form.is_valid()]):
+                # print(question_form)
+                question = question_form.save()
+                # print(Test.objects.all().get(id = testid))
+                question.related_test = Test.objects.all().get(id = testid)
+                question.save()
+                # print(question)
+                answer1 = answer1_form.save()
+                answer1.related_question = question
+                answer1.save()
+                answer2 = answer2_form.save()
+                answer2.related_question = question
+                answer2.save()
+                # print("is valid")
         answer_form = AnswerForm()
         question_form = QuestionForm()
         ctx = {

@@ -1,28 +1,105 @@
+# enumeration , sets, dictionaries, lambda, map, zip , рекурсия, iter, стандартные библиотеки,  LT
+# pop, arr[:], s[::-1], s[1:-1], алгоритмы, декораторы, перегрузка, 100 способов использования генераторов
+# вложенный генератор, arr.sort(key = func)   Use unusual contsructions: "It is %s%s" % ("John","Cena")
+# !help(), dir() НЕВЕРНО: arr[1:len(arr)-1], ВЕРНО: arr[1:-1], dict.items(), sorted( key = (str.lower,2,3)) картеж значений
+# проходка по вложенному файлам через рекурсию (применяется в каталогах)
+# асинхронка библиотечные структуры данных (связный список и т.д.) алгоритмы ООП модуль collections
+# https://habr.com/ru/company/vk/blog/506824/      yield(next)10
+# yield (с next, иначе вернет генератор  ) - спродуцировать / уступить           codeforces, leetcode, asp
+# alg: binary search , НОД, devisors(alg), recursion, linked lists
+# отладчик , кст,н    try/catch        all, any(condition1, condition2, ...)
+# Vis, all, any, rjust, декораторы, замыкания, in , not in
+# использования(counter) iter, enum, decorators,  recursion, try/catch
+# mystr.strip("482 3") - раздеть справа по этим символам.    mystr.zfill(20) - Дополняет до нулей длины
+# области видимости: локальная, нелокальная, глобальная.
+# T S     Counter, Json, openpyxl,   codewars collections, mystr.strip()
+# генераторы словарей, генераторы множеств, defaultdict, deque, namedtuple
+# Codeforces , Leetcode, file input output, Pandas, pickle , requests, reduce
+#
+# ToDo: Accept dots, dashes and spaces, return human-readable message
+from collections import Counter
+from collections import defaultdict
+# from functools import reduce
+# arr = [4,2,64,85,7]
+# print(reduce(lambda x,y: x*y, arr)) "425"
+from collections import deque
 
-arr=  [3,45,6,5,6,4,3,7,2,3,4,6,2,2]
 
-length =len(arr)
-i = 0
-while i < length:
-    arr.pop()
-    i+=1
-    length -=1
-    print(arr[i])
-
-text = "asdf"
-text.isu
-[text[i+1].upper() if text[i] =='-' else text[i] for i in range(len(text))]
+a = "hello"
+print(str(a))
+print(repr(a))
+# print(eval(str(a)))
+print(eval(repr(a)))
 
 
 
+# mystr = """
+# Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+#  aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+#   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+# Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+# """
+#
+# 27. Write a Python program to remove duplicate words from a given string use collections module.
+# MORSE_CODE = { 'A':'.-', 'B':'-...',
+#                     'C':'-.-.', 'D':'-..', 'E':'.',
+#                     'F':'..-.', 'G':'--.', 'H':'....',
+#                     'I':'..', 'J':'.---', 'K':'-.-',
+#                     'L':'.-..', 'M':'--', 'N':'-.',
+#                     'O':'---', 'P':'.--.', 'Q':'--.-',
+#                     'R':'.-.', 'S':'...', 'T':'-',
+#                     'U':'..-', 'V':'...-', 'W':'.--',
+#                     'X':'-..-', 'Y':'-.--', 'Z':'--..',
+#                     '1':'.----', '2':'..---', '3':'...--',
+#                     '4':'....-', '5':'.....', '6':'-....',
+#                     '7':'--...', '8':'---..', '9':'----.',
+#                     '0':'-----', ', ':'--..--', '.':'.-.-.-',
+#                     '?':'..--..', '/':'-..-.', '-':'-....-',
+#                     '(':'-.--.', ')':'-.--.-'}
+#
+#
+# [int(i) for i in list(str(123))]
+# print(5//10)
 
+# def decode_morse(morse_code):
+#     # ToDo: Accept dots, dashes and spaces, return human-readable message
+# #     print(MORSE_CODE)
+# #     return morse_code.replace('.', MORSE_CODE['.']).replace('-', MORSE_CODE['-']).replace(' ', '')
+#     res = ''
+#     for word in morse_code.split('   '):
+#         res += ''.join([MORSE_CODE[letter] for letter in word.split(' ')]) + ' '
+#     return res[:-1]
+#
+# print(decode_morse('.... . -.--   .--- ..- -.. .'))
 
-
-
-
-
-
-
+# class Solution(object):
+#     def get_indexes(self,thestr,letter):
+#         index = 0
+#         listofindexes = []
+#         while True:
+#             index = thestr.find(letter, index)
+#             if index == -1: break
+#             else:
+#                 listofindexes.append(index)
+#                 index += 1
+#         return tuple(listofindexes)
+#
+#     def isIsomorphic(self, s, t):
+#         if len(s) == len(t):
+#             myset = set()
+#             for i in range(len(t)):
+#                 if i not in myset:
+#                     a = self.get_indexes(s,s[i])
+#                     b = self.get_indexes(t,t[i])
+#                     myset.update(a,b)
+#                 if a!=b:
+#                     return False
+#             return True
+#         return False
+#
+#
+# obj = Solution()
+# print(obj.isIsomorphic('badc','baba'))
 
 
 

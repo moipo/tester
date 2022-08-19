@@ -16,15 +16,20 @@
  <form action = "" method="POST"> {% csrf_token %}
      <div class="form-group testformtxt">
          <textarea class ="form-control"  name="question" cols="40" rows="10" required="" id="id_question" placeholder = "Текст вопроса"></textarea>
-<!--         <div class = 'container'>-->
          <label class = "textstyle" for = "id_importance">Значимость вопроса (баллов за верный ответ от 1 до 10):</label>
          <input class ="form-control questionform_importance" min = "1" max = "10" type="number" name="importance" value="5" required="" id="id_importance" >
-         <button type="submit" class="btn btn-success btn-md createTestButton"> Добавить вопрос</button>
-<!--         </div>-->
-         {% comment %}
-        {{question_form}}
-         {% endcomment %}
+
      </div>
+
+     <div class="form-group" style = "margin-left: 450px;">
+       <br>
+     {{answer_form.as_p}}
+     <br>
+     {{answer_form.as_p}}
+     <br>
+     <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
+     </div>
+
  </form>
 <form action="{% url 'geturl' %}">
   <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
@@ -53,9 +58,9 @@
         }
 
 
-        .createTestButton{
+        .createQuestionButton{
         margin-top: 35px;
-        float:right;
+        margin-left: 300px;
         }
 
         .textstyle{
@@ -79,8 +84,13 @@
 
 
 {% block answer%}
-some text and form:
-{{answer_form.as_p}} {% csrf_token %}
+<!-- some text and form:
+<form class="" action="index.html" method="post"> {% csrf_token %}
+  {{answer_form.as_p}}
+  <br>
+  {{answer_form.as_p}}
+</form> -->
+
 
 
 
