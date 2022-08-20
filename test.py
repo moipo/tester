@@ -17,19 +17,16 @@
 # Codeforces , Leetcode, file input output, Pandas, pickle , requests, reduce
 #
 # ToDo: Accept dots, dashes and spaces, return human-readable message
-from collections import Counter
-from collections import defaultdict
-# from functools import reduce
-# arr = [4,2,64,85,7]
-# print(reduce(lambda x,y: x*y, arr)) "425"
-from collections import deque
+
+def rgb(r, g, b):
+    f = lambda i : 255 if i > 255 else 0
+    r,g,b = [i if i <= 255 and i >= 0 else f(i) for i in [r,g,b]]
+    return ''.join([str(hex(i))[2:].rjust(2).upper() for i in [r,g,b]])
 
 
-a = "hello"
-print(str(a))
-print(repr(a))
-# print(eval(str(a)))
-print(eval(repr(a)))
+
+print(rgb(255, 255, 300))
+
 
 
 
