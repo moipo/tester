@@ -31,7 +31,7 @@
      </div>
 
  </form>
-<form action="{% url 'geturl' %}">
+<form action="{% url 'geturl' testid %}">
   <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
 </form>
 
@@ -84,16 +84,16 @@
 
 
 {% block answer%}
+{% for question in previous_questions %}
 <!-- some text and form:
 <form class="" action="index.html" method="post"> {% csrf_token %}
   {{answer_form.as_p}}
   <br>
   {{answer_form.as_p}}
 </form> -->
+<br>
+<em>{{question}}</em>
+<br>
 
-
-
-
-
-
+{% endfor %}
 {% endblock%}

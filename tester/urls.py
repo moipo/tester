@@ -20,6 +20,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('univ_app.urls')),
     path('create/', include('univ_app.urls')),
+    path('testme/', include('univ_app.urls')),
     # path('createtest/<int:testid>/create_questions/', include('univ_app.urls')),
 
     # path('createtest/<int:testid>/create_questions/', include('univ_app.urls')),

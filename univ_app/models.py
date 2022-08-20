@@ -20,6 +20,9 @@ class Question(models.Model):
     related_test = models.ForeignKey("Test", on_delete=models.CASCADE, null=True )
     answered_correctly = models.BooleanField(default = False)
 
+    def __str__(self):
+        return self.question
+
 class Test(models.Model):
     title = models.CharField(max_length=100 )
     description = models.TextField(blank = True )
