@@ -78,13 +78,23 @@ class General:
         return render(request, "geturl.html", ctx)
 
 
-    def take_a_test(request,testid):
+    def take_a_test(request, testid):
         thetest = Test.objects.get(id = testid)
         ctx = {
         "testtitle" : thetest.title,
+        "testdescription" : thetest.description,
+        "testid" : thetest.pk,
         }
-        return render(request,"start_test.html", ctx )
+        return render(request,"take_a_test.html", ctx )
 
+
+    def test_taking(request,testid):
+
+        thetest = Test.objects.get(id = testid)
+        ctx = {
+        # "question" :
+        }
+        return render(request,"test_taking.html", ctx )
 
 
     # def add_answer(request):

@@ -1,5 +1,21 @@
 <!-- id теста, пропущенное через хэш функцию -->
 {% extends 'createtest_base.html' %}
 {% block congratulations %}
-  Congratulations! Your URL: {{yoururl}}
+<div class = "text-wrapper centrate cent" >
+  Congratulations! Your URL:
+  <strong><a class = "centrate" href = "{% url 'take_a_test' testid %}"> {{yoururl}} </a></strong>
+</div>
+
+<style>
+  .centrate {
+    font-size:30px;
+    margin:auto;
+    color: white;
+  }
+
+  .cent{
+    margin-left: 20%;
+    margin-top: 20%;
+  }
+</style>
 {% endblock %}

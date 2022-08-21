@@ -15,19 +15,148 @@
 # T S     Counter, Json, openpyxl,   codewars collections, mystr.strip()
 # генераторы словарей, генераторы множеств, defaultdict, deque, namedtuple
 # Codeforces , Leetcode, file input output, Pandas, pickle , requests, reduce
-#
+# тернарный оператор: 5 if not flag else 8, возвращение вложенной функции, метаклассы,  генератор функций.
 # ToDo: Accept dots, dashes and spaces, return human-readable message
 
-def rgb(r, g, b):
-    f = lambda i : 255 if i > 255 else 0
-    r,g,b = [i if i <= 255 and i >= 0 else f(i) for i in [r,g,b]]
-    return ''.join([str(hex(i))[2:].rjust(2).upper() for i in [r,g,b]])
 
 
 
-print(rgb(255, 255, 300))
 
 
+from pprint import pprint
+
+#ToDo: eight(times(five))
+
+
+print(ord("A"), ord('a'))
+lowercase = [chr(97+i) for i in range(0,26)]
+uppercase = [chr(65+i) for i in range(0,26)]
+lowercase_dict = {chr(97+i):lowercase[(i+13)%26] for i in range(0,26)}
+uppercase_dict = {chr(65+i):uppercase[(i+13)%26] for i in range(0,26)}
+res_dict = {}
+for key, value in lowercase_dict.items(): res_dict[key] = value
+for key, value in uppercase_dict.items(): res_dict[key] = value
+pprint(res_dict)
+
+
+
+
+# class eight():
+#     def __init__(self, tup = (-1,-1)):
+#
+#     def _
+
+# from collections import defaultdict
+# mydict = defaultdict(int)
+
+# 1 = +, 2 = - , 3 = * , 4 = //
+
+# class CreateNumber():
+#     def __init__(self, num):
+#         self.num = num
+#
+#         if tup == None:
+#             return thisnum
+#         else:
+#             if tup[0] == 1:
+#                 return thisnum + tup[1]
+#             elif tup[0] == 2:
+#                 return thisnum - tup[1]
+#             elif tup[0] == 3:
+#                 return thisnum * tup[1]
+#             elif tup[0] == 4:
+#                 return thisnum // tup[1]
+
+flag = True
+print(5 if not flag else 8)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def CreateNum(thisnum):
+#     def number(tup=None):
+#         if tup == None:
+#             return thisnum
+#         else:
+#             if tup[0] == 1:
+#                 return thisnum + tup[1]
+#             elif tup[0] == 2:
+#                 return thisnum - tup[1]
+#             elif tup[0] == 3:
+#                 return thisnum * tup[1]
+#             elif tup[0] == 4:
+#                 return thisnum // tup[1]
+#     return number
+#
+#
+# def plus(num):
+#     return (1,num)
+#
+# def minus(num):
+#     return (2,num)
+#
+# def times(num):
+#     return (3,num)
+#
+# def devided_by(num):
+#     return (4,num)
+#
+#
+#
+# one = CreateNum(1)
+# two = CreateNum(2)
+# three = CreateNum(3)
+# four = CreateNum(4)
+# five = CreateNum(5)
+# six = CreateNum(6)
+# seven = CreateNum(7)
+# eight = CreateNum(8)
+# nine= CreateNum(9)
+
+
+
+
+
+
+# def five(tup = None):
+#     thisnum = 5
+#     if tup == None:return thisnum
+#     else:
+#         if tup[0] == 1: return thisnum + tup[1]
+#         elif tup[0] == 2: return thisnum - tup[1]
+#         elif tup[0] == 3: return thisnum * tup[1]
+#         elif tup[0] == 4: return thisnum // tup[1]
+
+
+
+# def eight(tup=None):
+#     thisnum = 8
+#     if tup == None:return thisnum
+#     else:
+#         if tup[0] == 1: return thisnum + tup[1]
+#         elif tup[0] == 2: return thisnum - tup[1]
+#         elif tup[0] == 3: return thisnum * tup[1]
+#         elif tup[0] == 4: return thisnum // tup[1]
+
+
+#
+# print(eight(times(five())))
+# print(five(times(eight())))
 
 
 # mystr = """
