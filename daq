@@ -1,0 +1,77 @@
+[33mcommit 934a7799fcab5817a8b7580b32d042636a5951eb[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Sun Aug 21 17:00:14 2022 +0300
+
+    -Refactoring
+
+[33mcommit 469641e369c172e17d56dda286a1c02ed75131d9[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Sun Aug 21 15:07:18 2022 +0300
+
+    Refactoring
+
+[33mcommit 350baed934964f1dcc6bd1828a0ffcaf9194e713[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Sun Aug 21 15:06:48 2022 +0300
+
+    'Refactoring
+
+[33mcommit aaf47df3ea098f0dbc2ad205980f97368a9ef3e9[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Sat Aug 20 20:37:12 2022 +0300
+
+    url generator
+
+[33mcommit d3c2edac3512b53c83ea75d770902c2804c389ce[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Sat Aug 20 19:05:56 2022 +0300
+
+    s
+
+[33mcommit e1702fe7f63ce619dcaaba251649c6e8c62fe75c[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Fri Aug 19 20:03:32 2022 +0300
+
+    Questions and answers are saved properly
+
+[33mcommit a98730941698d428fd24bfd1b3b29f2768041e48[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Thu Aug 18 18:21:12 2022 +0300
+
+    added question form
+
+[33mcommit 29e0e5c8ac80f3a5b5eb58b1f611f4f141a1ac7c[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Thu Aug 18 17:18:52 2022 +0300
+
+    URL for questions is created properly
+
+[33mcommit 43a1ddb06de21719638d91c7b79b29d19676aa98[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Thu Aug 18 16:29:18 2022 +0300
+
+    Refactoring
+
+[33mcommit ec5a38d5978a169c6c9566a5d2c1bcd3f4f07d02[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Wed Aug 17 15:29:08 2022 +0300
+
+    Refactoring problems
+
+[33mcommit ddfcb5e2f0cfae72220a9a2e5a5bb8b758ee48d9[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Tue Aug 16 13:10:16 2022 +0300
+
+    Added question form
+
+[33mcommit 9c512b1f4d122a29862fb8bbbb46b41a774aea14[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Tue Aug 16 08:34:31 2022 +0300
+
+    designed a testform
+
+[33mcommit 1b41caa42c0e8e783c17d475645c00b22d07d71a[m[33m ([m[1;31morigin/master[m[33m)[m
+Author: moipo <moipochtoviyyashik@inbox.ru>
+Date:   Mon Aug 15 17:26:08 2022 +0300
+
+    Frontend + work on test contructor
