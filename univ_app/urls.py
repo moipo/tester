@@ -7,7 +7,7 @@ urlpatterns = [
     path('newtest/<int:testid>/create_questions/',General.createquestions_form, name = "newquestions"),
     path('geturl/<int:testid>', General.geturl, name = "geturl"),
     path('take_a_test/<int:testid>', General.take_a_test, name = "take_a_test"),
-    path('take_a_test/<int:testid>/test_taking/', General.test_taking, name = "test_taking"),
+    path('take_a_test/<int:testid>/test_taking/<int:current_question>', General.test_taking, name = "test_taking"),
     # path('add_answer/', General.add_answer, name = 'add_answer'),
 ]
 # <int:testid>

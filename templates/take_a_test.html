@@ -4,7 +4,6 @@
 {% block start_test %}
 
 <div class = 'container'>
-
   <br>
   <br>
   <div class="border border-light p-3 mb-4 " style = "width: 50%; margin:auto; ">
@@ -17,11 +16,10 @@
       Описание: {{testdescription}}
     </div>
   </div>
-
 </div>
 
 
-<form action = "{% url 'test_taking' testid%}">
+<form action = "{% url 'test_taking' testid 0 %}">
     <button type="submit" class = "btn btn-success btn-lg midbtn" name="button">Начать тест</button>
 </form>
 {% endblock %}

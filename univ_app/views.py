@@ -88,11 +88,19 @@ class General:
         return render(request,"take_a_test.html", ctx )
 
 
-    def test_taking(request,testid):
+    def test_taking(request,testid,current_question):
+        thetest = Test.objects.get(pk = testid)
+        question_set = Question.objects.filter(related_test = thetest)
+        this_question = None
 
-        thetest = Test.objects.get(id = testid)
+        this_question = question_set[current_question] #current_question_num
+        next_question_num = current_question + 1
+        if len(question_set) < next_question_num:
+            next_question = 999999 #finishthetest
         ctx = {
-        # "question" :
+            "this_question": this_question,
+            "next_question_num": next_question_num,
+            "testid": testid,
         }
         return render(request,"test_taking.html", ctx )
 

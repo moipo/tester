@@ -1,5 +1,21 @@
 {% extends "base_for_answering.html"%}
 
 {%block showquestions %}
+<div class = 'container'>
+  <br>
+  <br>
+  <div class="border border-light p-3 mb-4 " style = "width: 50%; margin:auto; ">
+    <div class="text-nowrap red" style="width: 8rem; color: white; text-aligh">
+      Вопрос номер {{ next_question }}: {{this_question}}
+    </div>
+  </div>
+  <!-- <div class="border border-light p-3 mb-4">
+    <div class="text-wrap" style="width: 8rem; color: white;">
+    </div>
+  </div> -->
 
+  <form action = "{% url 'test_taking' testid 0 %}">
+      <button type="submit" class = "btn btn-success btn-lg midbtn" name="button">Начать тест</button>
+  </form>
+</div>
 {% endblock %}
