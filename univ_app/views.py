@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from .forms import *
 #проблема такого(*) импорта в том, что все импортированные библиотеки тоже сюда импортируются
 from .models import *
@@ -111,27 +112,70 @@ class General:
 
     def signinup(request):
         if request.method == "POST": #елси это POST, значит мы берем инфу из секции POST
-            user_form = UserForm(request.POST)
-            print(request.POST)
-            if user_form.is_valid():
-                print(user_form.cleaned_data)
-                user = User.objects.create_user(**user_form.cleaned_data)
-                print(user)
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            user = authenticate(request, username = username, password = password)
+            if user is None:
+
+                user_form = UserForm()
+                ctx = {
+                'error' : "Invalid username or password",
+                "user_form" : user_form,
+                }
+                  #asdf adsf - пользователь
+                return render(request, "sign/signinup.html", ctx)
             else:
-                print("User form is not valid")
-            user_form = UserForm()
-            ctx = {
-            "user_form" : user_form,
-            "HTTPRESPONSE" : request.POST,
-            }
-            return render(request, "signinup.html", ctx)
+                login(request,user)
+                ctx = {
+                    "user" : user,
+                }
+                return render(request, "profile/myprofile.html", ctx)
+
         else:
             user_form = UserForm()
             ctx = {
             "user_form" : user_form,
-            # "HTTPRESPONSE" : request.META,
             }
-            return render(request, "signinup.html", ctx)
+            return render(request, "sign/signinup.html", ctx)
+
+
+            #regiester
+            # user = User.objects.create_user(username = username, password = password)
+            # print(user)
+            # return HttpResponse("<h1> homepage <h1>")
+            # return redirect(General.show_my_profile)
+
+
+
+    # def show_my_profile(request, user):
+        # ctx = {
+        #     "user" : user,
+        # }
+        # return render(request, "profile/myprofile.html", ctx)
+
+
+            # # user_form = UserForm(request.POST)
+            # print(request.POST)
+            # if user_form.is_valid():
+            #     print(user_form.cleaned_data)
+            #     user = User.objects.create_user(**user_form.cleaned_data)
+            #     print(user)
+            # else:
+            #     print("User form is not valid")
+            # user_form = UserForm()
+            # ctx = {
+            # "user_form" : user_form,
+            # "HTTPRESPONSE" : request.POST,
+            # }
+            # return render(request, "sign/signinup.html", ctx)
+        # else:
+        #     user_form = UserForm()
+        #     ctx = {
+        #     "user_form" : user_form,
+        #     # "HTTPRESPONSE" : request.META,
+        #     }
+        #     return render(request, "sign/signinup.html", ctx)
 
 
     # def add_answer(request):
