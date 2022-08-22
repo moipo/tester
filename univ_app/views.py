@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
 from .forms import *
+#проблема такого(*) импорта в том, что все импортированные библиотеки тоже сюда импортируются
 from .models import *
 from django.urls import reverse
+from django.contrib.auth.models import User
+from django.http import HttpResponse # для начальной разметки
+
 
 
 
@@ -103,6 +107,31 @@ class General:
             "testid": testid,
         }
         return render(request,"test_taking.html", ctx )
+
+
+    def signinup(request):
+        if request.method == "POST": #елси это POST, значит мы берем инфу из секции POST
+            user_form = UserForm(request.POST)
+            print(request.POST)
+            if user_form.is_valid():
+                print(user_form.cleaned_data)
+                user = User.objects.create_user(**user_form.cleaned_data)
+                print(user)
+            else:
+                print("User form is not valid")
+            user_form = UserForm()
+            ctx = {
+            "user_form" : user_form,
+            "HTTPRESPONSE" : request.POST,
+            }
+            return render(request, "signinup.html", ctx)
+        else:
+            user_form = UserForm()
+            ctx = {
+            "user_form" : user_form,
+            # "HTTPRESPONSE" : request.META,
+            }
+            return render(request, "signinup.html", ctx)
 
 
     # def add_answer(request):

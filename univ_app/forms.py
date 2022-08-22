@@ -1,5 +1,6 @@
 from .models import *
 from django import forms
+from django.contrib.auth.models import User
 
 class TestForm(forms.ModelForm):
     class Meta:
@@ -48,3 +49,20 @@ class AnswerForm(forms.ModelForm):
             "is_right" : "Ответ является правильным ",
             'answer': "Ответ",
         }
+
+class UserForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs) #parent class
+        self.fields['username'].widget.attrs.update(
+        {'class': 'form-control',
+         'style':' placeholder : "Логин"',})
+        self.fields['password'].widget.attrs.update(
+        {'class': 'form-control',
+         'style':' placeholder : "Пароль"',})
+
+    class Meta:
+        model = User
+        fields = [
+        'username',
+        'password',
+        ]

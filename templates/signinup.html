@@ -1,0 +1,27 @@
+{% extends 'base_for_answering.html' %}
+
+{% block whoareyou %}
+
+<div class="container signinup-form">
+  <form action = "{% url 'signinup' %}" method="post"> {% csrf_token %}
+    {{user_form.as_p}}
+    <button type="submit" style = "margin-left: 60px;"> Login </button>
+  </form>
+</div>
+<!-- <form> {% csrf_token %}
+    <input type="text" name="username">
+    <input type= "password" name = "password">
+    <button type="submit" name="button"> Login </button>
+</form> -->
+
+<style>
+  .signinup-form{
+    background-color: orange;
+    margin: auto;
+    width: 300px;
+    height; 200px;
+    padding: 40px;
+
+  }
+</style>
+{% endblock %}
