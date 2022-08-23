@@ -8,7 +8,9 @@ urlpatterns = [
     path('geturl/<int:testid>', General.geturl, name = "geturl"),
     path('take_a_test/<int:testid>', General.take_a_test, name = "take_a_test"),
     path('take_a_test/<int:testid>/test_taking/<int:current_question>', General.test_taking, name = "test_taking"),
-    path('signinup/', General.signinup, name = "signinup"),
+    path('login/', General.login_form, name = "login_form"),
+    path('register/', General.register, name = "register"),
+    path('log_out/', General.log_out, name = "log_out"),
     # path('show_my_profile', General.show_my_profile, name = "show_my_profile"),
     # path('add_answer/', General.add_answer, name = 'add_answer'),
 ]

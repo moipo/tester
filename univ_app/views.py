@@ -110,7 +110,7 @@ class General:
         return render(request,"test_taking.html", ctx )
 
 
-    def signinup(request):
+    def login_form(request):
         if request.method == "POST": #елси это POST, значит мы берем инфу из секции POST
             username = request.POST.get("username")
             password = request.POST.get("password")
@@ -124,7 +124,7 @@ class General:
                 "user_form" : user_form,
                 }
                   #asdf adsf - пользователь
-                return render(request, "sign/signinup.html", ctx)
+                return render(request, "sign/login_form.html", ctx)
             else:
                 login(request,user)
                 ctx = {
@@ -137,7 +137,77 @@ class General:
             ctx = {
             "user_form" : user_form,
             }
-            return render(request, "sign/signinup.html", ctx)
+            return render(request, "sign/login_form.html", ctx)
+
+
+
+    def register(request):
+        if request.method == "POST":
+            username = request.POST.get("username")
+            password = request.POST.get("password")
+
+            user = authenticate(request, username = username, password = password)
+            if user is None:
+                user = User.objects.create_user(username = username, password = password)
+                ctx = {
+                    "user" : user,
+                }
+                return render(request, "profile/myprofile.html", ctx)
+            else:
+                user_form = UserForm()
+                ctx = { "error" :
+                "Такой пользователь уже существует! Используйте другой логин.",
+                "user_form" : user_form,
+                }
+                return render(request, "sign/register.html", ctx)
+
+        else:
+            user_form = UserForm()
+            ctx = {
+            "user_form" : user_form,
+            }
+            return render(request, "sign/register.html", ctx)
+
+    def log_out(request):
+        return redirect(General.base)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
             #regiester

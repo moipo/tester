@@ -4,8 +4,20 @@
 
 
 {% if user %}
-<h1><p style = "color:white;">{{user}}, Вы успешно вошли!</p></h1>
+<div class = "btn-info size">
+  <h1><p style = "color:white;">{{user}}, Вы успешно авторизировались!</p></h1>
+  Хотите <a href="{% url 'log_out' %}">ВЫЙТИ?</a>
+</div>
 {% endif %}
 
+<style media="screen">
+.size{
+  width:300px;
+  height:200px;
+  margin-left: 350px;
+  margin-top:250px;
+  display: inline-block;
+}
+</style>
 
 {%endblock%}
