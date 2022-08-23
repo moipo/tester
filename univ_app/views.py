@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from .forms import *
 #проблема такого(*) импорта в том, что все импортированные библиотеки тоже сюда импортируются
 from .models import *
@@ -16,7 +16,11 @@ from django.http import HttpResponse # для начальной разметк�
 
 class General:
     def base(request):
-        return render(request, "very_first_page.html", {})
+        ctx = {
+        "state_of_user" : request.user.is_authenticated
+        }
+
+        return render(request, "very_first_page.html", ctx)
 
     def createtest_form(request):
         if request.method == "POST":
@@ -169,6 +173,8 @@ class General:
             return render(request, "sign/register.html", ctx)
 
     def log_out(request):
+        if request.user.is_authenticated:
+            logout(request)
         return redirect(General.base)
 
 

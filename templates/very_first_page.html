@@ -26,7 +26,11 @@
       <ul class="navbar-nav">
         <li class="nav-item">
           <form action = "{% url 'login_form' %}">
+            {% if not request.user.is_authenticated %}
             <button class = "btn btn-primary btn-lg">Войти</button>
+            {% else %}
+            <button class = "btn btn-danger btn-lg">ВЫЙТИ</button>
+            {% endif %}
           </form>
         </li>
         <li class="nav-item ">
@@ -48,6 +52,11 @@
     <div>
       <div class = "middle">
         <div class = "content">
+          {% if state_of_user %}
+          Юзер залогинен
+          {% else %}
+          Юзер не залогинен
+          {% endif %}
             <form action = "{% url 'newtest' %}">
                 <button type="submit" class = "btn btn-success btn-lg midbtn" name="button">Создать тест</button>
             </form>
