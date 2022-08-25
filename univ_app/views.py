@@ -6,7 +6,8 @@ from .models import *
 from django.urls import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponse # для начальной разметки
-
+from django.contrib.auth.decorators import login_required
+#add: login_required, form
 
 
 
@@ -177,9 +178,13 @@ class General:
             logout(request)
         return redirect(General.base)
 
+    @login_required(login_url = "/login_required/")
+    def statistics(request):
+        content = "<h1> СТАТИСТИКА ОТВЕТОВ НА ТЕСТЫ </h1>"
+        return HttpResponse(content)
 
-
-
+    def access_denied(request):
+        return render(request,"login_required_redirect.html",{})
 
 
 
