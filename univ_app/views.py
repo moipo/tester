@@ -14,6 +14,14 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
 
 class General:
     def base(request):
@@ -77,7 +85,7 @@ class General:
     def geturl(request, testid):
 
         print(request.get_host)
-        path = reverse(General.take_a_test, args = [testid])
+        path = reverse(General.start_a_test, args = [testid])
         yoururl = str(request.META["HTTP_HOST"])  + str(path)
         ctx = {
         "testid":testid,
@@ -88,31 +96,34 @@ class General:
         return render(request, "geturl.html", ctx)
 
 
-    def take_a_test(request, testid):
-        thetest = Test.objects.get(id = testid)
+    def start_a_test(request, testid):
+        the_test = Test.objects.get(id = testid)
+        the_questions = Question.get_test_questions(the_test)
         ctx = {
-        "testtitle" : thetest.title,
-        "testdescription" : thetest.description,
-        "testid" : thetest.pk,
+        "the_test":the_test,
+        "the_questions" : the_questions,
         }
-        return render(request,"take_a_test.html", ctx )
+        return render(request,"test_taking/start_a_test.html", ctx )
 
 
-    def test_taking(request,testid,current_question):
-        thetest = Test.objects.get(pk = testid)
-        question_set = Question.objects.filter(related_test = thetest)
+    def test_taking(request, testid, current_question_num):
+        the_test = Test.objects.get(pk = testid)
+        question_set = Question.get_test_questions(the_test)
         this_question = None
 
-        this_question = question_set[current_question] #current_question_num
-        next_question_num = current_question + 1
+        this_question = question_set[current_question_num] #current_question_num
+        next_question_num = current_question_num + 1
         if len(question_set) < next_question_num:
             next_question = 999999 #finishthetest
+
+        the_answers = Answer.get_answers(this_question)
         ctx = {
             "this_question": this_question,
             "next_question_num": next_question_num,
-            "testid": testid,
+            "the_answers" : the_answers,
+            "the_test" : the_test,
         }
-        return render(request,"test_taking.html", ctx )
+        return render(request,"test_taking/test_taking.html", ctx )
 
 
     def login_form(request):
