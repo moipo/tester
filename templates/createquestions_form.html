@@ -23,9 +23,19 @@
 
      <div class="form-group" style = "margin-left: 450px;">
        <br>
-     {{answer_form.as_p}}
-     <br>
-     {{answer_form.as_p}}
+
+       <!-- {%for answer_form in answer_form_set%} -->
+
+        {{answer_form1.as_p}}
+        {{answer_form2.as_p}}
+        {{answer_form3.as_p}}
+        {{answer_form4}}
+    
+       <!-- {% endfor %} -->
+
+
+      <!-- {#одноименная одна и та же форма #} -->
+
      <br>
      <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
      </div>

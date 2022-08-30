@@ -16,6 +16,7 @@ class Test(models.Model):
     def __str__(self):
         return self.title
 
+    #Test.getquestions
 class Question(models.Model):
     question = models.TextField(default = "")
     importance = models.IntegerField(default = 5, validators=[
@@ -46,8 +47,8 @@ class Answer(models.Model):
         the_answers = Answer.objects.filter(related_question = the_question)
         return the_answers
 
-    def __repr__(self):
-        return self.answer
+    # def __repr__(self):
+    #     return self.answer
 
     def __str__(self):
         return self.answer

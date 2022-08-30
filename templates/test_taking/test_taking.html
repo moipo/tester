@@ -6,7 +6,7 @@
   <br>
   <div class="border border-light p-3 mb-4 " style = "width: 50%; margin:auto; ">
     <div class="text-nowrap red" style="width: 8rem; color: white; text-aligh">
-      Вопрос {{ next_question }}/ {{this_question}}
+      Вопрос {{ next_question_num|add:"-1" }}/{{test_len}}:  {{this_question}}
     </div>
   </div>
   <!-- <div class="border border-light p-3 mb-4">
@@ -14,7 +14,7 @@
     </div>
   </div> -->
 
-  <form action = "{% url 'test_taking' the_test.id 0 %}">
+  <form action = "{% url 'test_taking' the_test.id next_question_num %}">
       <ul>
         {% for answer in the_answers %}
           <li>{{answer}}</li>

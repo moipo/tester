@@ -71,12 +71,19 @@ class General:
                 answer2.related_question = question
                 answer2.save()
                 # print("is valid")
-        answer_form = AnswerForm()
+        answer_form1 = AnswerForm() #костыль
+        answer_form2 = AnswerForm()
+        answer_form3 = AnswerForm()
+        answer_form4 = AnswerForm()
+        # answer_form_set = [answer_form1,answer_form2,answer_form3,answer_form4]
         question_form = QuestionForm()
         previous_questions = Question.objects.filter(related_test = Test.objects.get(id=testid))
         ctx = {
             'question_form' : question_form,
-            'answer_form' : answer_form,
+            'answer_form1':AnswerForm(),
+            'answer_form2':answer_form2,
+            'answer_form3':answer_form3,
+            'answer_form4':answer_form4,
             'previous_questions': previous_questions,
             'testid': testid,
         }
@@ -122,6 +129,7 @@ class General:
             "next_question_num": next_question_num,
             "the_answers" : the_answers,
             "the_test" : the_test,
+            "test_len" : len(question_set)
         }
         return render(request,"test_taking/test_taking.html", ctx )
 
