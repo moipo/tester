@@ -56,8 +56,10 @@ class General:
             question_form = QuestionForm(request.POST)
             answer1_form = AnswerForm(request.POST)
             answer2_form = AnswerForm(request.POST)
+            answer3_form = AnswerForm(request.POST)
+            answer4_form = AnswerForm(request.POST)
             print("it's ok 2")
-            if all([question_form.is_valid(), answer1_form.is_valid(), answer2_form.is_valid()]):
+            if all([question_form.is_valid(), answer1_form.is_valid(), answer2_form.is_valid(), answer3_form.is_valid(), answer4_form.is_valid()]):
                 # print(question_form)
                 question = question_form.save()
                 # print(Test.objects.all().get(id = testid))
@@ -70,13 +72,26 @@ class General:
                 answer2 = answer2_form.save()
                 answer2.related_question = question
                 answer2.save()
+                answer3 = answer3_form.save()
+                answer3.related_question = question
+                answer3.save()
+                answer4 = answer4_form.save()
+                answer4.related_question = question
+                answer4.save()
+
                 # print("is valid")
-        answer_form = AnswerForm()
+        answer1_form = AnswerForm()
+        answer2_form = AnswerForm()
+        answer3_form = AnswerForm()
+        answer4_form = AnswerForm()
         question_form = QuestionForm()
         previous_questions = Question.objects.filter(related_test = Test.objects.get(id=testid))
         ctx = {
             'question_form' : question_form,
-            'answer_form' : answer_form,
+            'answer1_form' : answer1_form,
+            'answer2_form' : answer2_form,
+            'answer3_form' : answer3_form,
+            'answer4_form' : answer4_form,
             'previous_questions': previous_questions,
             'testid': testid,
         }
