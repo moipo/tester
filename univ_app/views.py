@@ -157,6 +157,7 @@ class General:
                 ctx = {
                     "user" : user,
                 }
+
                 return render(request, "profile/myprofile.html", ctx)
             else:
                 user_form = UserForm()
@@ -188,7 +189,27 @@ class General:
 
 
 
-
+    def show_change_user_credentials(request):
+        form = ChangeUserForm()
+        # form = CreateUserForm(request.POST or None) - instead of first if
+        ctx = {
+            "form":form
+        }
+        if request.method == "POST":
+            form = ChangeUserForm(request.POST) #dictionary
+            ctx['form'] = form
+            if form.is_valid(): # запускается имплементированный нами метод clean()
+                print("form is valid")
+                first_name = form.cleaned_data.get("first_name")
+                last_name = form.cleaned_data.get("last_name")
+                this_user = request.user
+                # user = User.objects.filter(first_name = this_user.first_name, last_name = this_user.last_name )[0]
+                # print(user)
+                user.first_name = first_name
+                user.last_name = last_name
+                user.save()
+                return redirect(General.show_my_profile)
+        return render(request, "profile/change_user_credentials.html", ctx)
 
 
 
@@ -229,11 +250,11 @@ class General:
 
 
 
-    # def show_my_profile(request, user):
-        # ctx = {
-        #     "user" : user,
-        # }
-        # return render(request, "profile/myprofile.html", ctx)
+    def show_my_profile(request):
+        ctx = {
+            "user" : request.user,
+        }
+        return render(request, "profile/myprofile.html", ctx)
 
 
             # # user_form = UserForm(request.POST)

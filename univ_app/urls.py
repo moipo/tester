@@ -13,6 +13,9 @@ urlpatterns = [
     path('log_out/', General.log_out, name = "log_out"),
     path('statistics/', General.statistics, name = "statistics"),
     path('login_required/', General.access_denied, name = "access_denied"),
+    path('show_my_profile/', General.show_my_profile, name = "show_my_profile"),
+    path('show_change_user_credentials/', General.show_change_user_credentials, name = "show_change_user_credentials"),
+
     # path('show_my_profile', General.show_my_profile, name = "show_my_profile"),
     # path('add_answer/', General.add_answer, name = 'add_answer'),
 ]

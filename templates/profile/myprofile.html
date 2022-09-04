@@ -5,8 +5,11 @@
 
 {% if user %}
 <div class = "btn-info size">
-  <h1><p style = "color:white;">{{user}}, Вы успешно авторизировались!</p></h1>
+  <h1><p style = "color:white;">{{request.user}}, Вы успешно авторизировались!</p></h1>
   Хотите <a href="{% url 'log_out' %}">ВЫЙТИ?</a>
+</div>
+<div class="container">
+  <a href="{% url 'show_change_user_credentials' %}">Изменить данные</a>
 </div>
 {% endif %}
 
@@ -17,6 +20,7 @@
   margin-left: 350px;
   margin-top:250px;
   display: inline-block;
+  float:left;
 }
 </style>
 

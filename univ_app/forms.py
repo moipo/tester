@@ -2,6 +2,26 @@ from .models import *
 from django import forms
 from django.contrib.auth.models import User
 
+
+class ChangeUserForm(forms.Form):
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+
+    def clean_first_name(self):
+        cleaned_data = self.cleaned_data #dictioary
+        first_name = cleaned_data.get('first_name')
+        if first_name.strip() == "Ivan": #Владиация немодельных форм.
+            raise forms.ValidationError("This name is taken")
+        return cleaned_data
+
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        print(cleaned_data)
+        return cleaned_data
+
+
+
 class TestForm(forms.ModelForm):
     class Meta:
         model = Test
