@@ -8,18 +8,36 @@
   <br>
   <div class="border border-light p-3 mb-4 " style = "width: 50%; margin:auto; ">
     <div class="text-nowrap red" style="width: 8rem; color: white; text-aligh">
-      Название теста: {{testtitle}}
+      Название теста: {{the_test.title}}
     </div>
   </div>
   <div class="border border-light p-3 mb-4">
     <div class="text-wrap" style="width: 8rem; color: white;">
-      Описание: {{testdescription}}
+      Описание: {{the_test.description}}
+    </div>
+    <div class="container question_box">
+      <ul>
+      {%for question in the_questions%}
+        <li>{{question}} </li>
+      {% endfor %}
+      </ul>
     </div>
   </div>
 </div>
 
 
-<form action = "{% url 'test_taking' testid 0 %}">
+<form action = "{% url 'test_taking' the_test.pk 0 %}">
     <button type="submit" class = "btn btn-success btn-lg midbtn" name="button">Начать тест</button>
 </form>
+
+<style>
+  .question_box{
+    display:flex;
+    background-color:green;
+    width:200px;
+    height:auto;
+    float:right;
+    border: 3px solid orange;
+  }
+</style>
 {% endblock %}

@@ -10,7 +10,7 @@ class TryDjangoConfigTest(TestCase):
         self.assertTrue(1==1)
         self.assertEqual(1,2)
 
-    def test_secret_key_strangth():
+    def test_secret_key_strangth(self):
         SECRET_KEY = os.environ.get("SECRET_KEY")
         try:
             pass #dosomething
