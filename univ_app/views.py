@@ -213,6 +213,9 @@ class General:
         return render(request,"login_required_redirect.html",{})
 
 
+    def result(request):
+        ctx = {}
+        return render(request, "test_taking/result.html",ctx)
 
 
 
