@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.signals import pre_save, post_save
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 
@@ -14,7 +15,7 @@ class Test(models.Model):
     link = models.CharField(max_length=1000, default = '')
 
     def save(self, *args, **kwargs):
-        if self.slug is None:
+        if self.slug is None: #if title is changed => slug is generated.
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
 
@@ -23,6 +24,37 @@ class Test(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return f'/articles/{self.slug}/'
+        #<a href = "/articles/{{x.id}}/ =>
+        #<a href = "{{x.get_absolute_url}}">
+
+
+def test_pre_save(sender, instance, *args, **kwargs):
+    print("pre_save")
+    print(args,kwargs) #instance = Test instance
+    print(sender,instance)
+    if instance.slug is None: #if title is changed => slug is generated.
+        instance.slug = slugify(instance.title)
+    # super().save(*args, **kwargs)
+    pass
+
+pre_save.connect(test_pre_save, sender = Test)
+#pre_save is going to connect to test_pre_save() every time the model
+#Test is saved
+
+def test_post_save(sender, instance, created, *args, **kwargs): #is called after Test is saved
+    print("post_save")
+    print(args,kwargs)
+    if created:
+        instance.slug = slugify(instance.title)
+        instance.save()
+
+post_save.connect(test_post_save, sender = Test)
+
+
+
 
 class Question(models.Model):
     question = models.TextField(default = "")
