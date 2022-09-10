@@ -1,14 +1,22 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.utils.text import slugify
 
 # Create your models here.
 class Test(models.Model):
     title = models.CharField(max_length=100 )
+    slug = models.SlugField(max_length = 120 , blank = True, null = True)
+
+
     description = models.TextField(blank = True )
     # creator = models.ForeignKey("User", on_delete=models.PROTECT, null=True, default=1)
     score = models.IntegerField(default = 0)
     link = models.CharField(max_length=1000, default = '')
+
+    def save(self, *args, **kwargs):
+        if self.slug is None:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
     class Meta:
         ordering = ['title']
@@ -24,6 +32,7 @@ class Question(models.Model):
     ])
     related_test = models.ForeignKey("Test", on_delete=models.CASCADE, null=True )
     answered_correctly = models.BooleanField(default = False)
+
 
     def __str__(self):
         return self.question
