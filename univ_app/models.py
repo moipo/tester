@@ -51,7 +51,7 @@ def test_post_save(sender, instance, created, *args, **kwargs): #is called after
         instance.slug = slugify(instance.title)
         instance.save()
 
-post_save.connect(test_post_save, sender = Test)
+    post_save.connect(test_post_save, sender = Test)
 
 
 
@@ -80,11 +80,12 @@ class Answer(models.Model):
     answer = models.CharField(max_length=1000)
     was_chosen = models.BooleanField(default=False)
     is_right = models.BooleanField(default=False)
-    related_question = models.ForeignKey("Question", on_delete=models.PROTECT, null = True)
+    related_question = models.ForeignKey("Question", on_delete=models.CASCADE, null = True)
 
 
     def get_answers(the_question:Question):
         the_answers = Answer.objects.filter(related_question = the_question)
+        print(the_answers)
         return the_answers
 
     def __repr__(self):

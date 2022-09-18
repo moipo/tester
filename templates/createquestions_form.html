@@ -1,4 +1,6 @@
 {% extends "createtest_base.html" %}
+{% load static %}
+
 
 {% block questions_form %}
 
@@ -11,6 +13,8 @@
 <!--        <button type="submit" class="btn btn-success btn-md createTestButton"> Продолжить</button>-->
 <!--    </div>-->
 <!--</form>-->
+<script src = "static 'univ_app/js/createquestions_form.js'" defer></script>
+
 
 
  <form action = "" method="POST"> {% csrf_token %}
@@ -18,23 +22,32 @@
          <textarea class ="form-control"  name="question" cols="40" rows="10" required="" id="id_question" placeholder = "Текст вопроса"></textarea>
          <label class = "textstyle" for = "id_importance">Значимость вопроса (баллов за верный ответ от 1 до 10):</label>
          <input class ="form-control questionform_importance" min = "1" max = "10" type="number" name="importance" value="5" required="" id="id_importance" >
-
      </div>
+     <button type = "button" class="btn btn-primary plusBtn" name="button"> Add question </button>
+     <div class="form-group ansGroup" style = "margin-left: 450px;">
+       <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
+       <div id = "empty_form" class ="hidden" >
+     {{answer_form.as_p}}
+      </div>
 
-     <div class="form-group" style = "margin-left: 450px;">
-     {{answer1_form.as_p}}
-     {{answer2_form.as_p}}
-     {{answer3_form.as_p}}
-     {{answer4_form.as_p}}
-     <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
      </div>
 
  </form>
-<form action="{% url 'geturl' testid %}">
+<!-- {# <form action="{% url 'geturl' testid %}">#}
   <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
-</form>
+</form> -->
 
 <style>
+
+        .hidden{
+          display:none
+        }
+
+        #empty_form{
+
+        }
+
+
         .testformstr{
         margin-top: 50px;
         width:300px;
@@ -78,10 +91,24 @@
 
 
 </style>
+
+<script defer>
+
+const plusBtn = document.querySelector('.plusBtn')
+plusBtn.addEventListener('click', function handler() {
+  const emptyForm = document.querySelector('#empty_form')
+  console.log(emptyForm)
+  // const emptyForm = document.getElementById('empty_form')
+  let newForm = emptyForm.сloneNode(true)
+  newForm.classList.remove("hidden")
+  const ansGroup = document.querySelector(".ansGroup")
+  ansGroup.appendChild(newForm)
+  console.log("событие было вызвано")
+handler() // Hidden Не обязателен.
+});
+</script>
+
 {% endblock %}
-
-
-
 {% block answer%}
 {% for question in previous_questions %}
 <!-- some text and form:

@@ -15,6 +15,16 @@ class TestForm(forms.ModelForm):
             "description" : "Описание",
         }
 
+# class AnswerFormNotModel(forms.Form):
+#     answer = forms.CharField(max_length=1000)
+#     was_chosen = forms.BooleanField()
+#     is_right = forms.BooleanField()
+#     related_question = forms.ModelChoiceField #integerField
+
+
+
+
+
 class QuestionForm(forms.ModelForm):
     class Meta:
         model = Question
