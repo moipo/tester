@@ -59,6 +59,7 @@ class General:
         answer_form = AnswerForm()
         ctx = {
         "answer_form" : answer_form,
+        'testid': testid,
         }
         return render(request,"createquestions_form.html", ctx)
 
@@ -137,8 +138,6 @@ class General:
         "testid":testid,
         "yoururl": yoururl,
         }
-
-
         return render(request, "geturl.html", ctx)
 
 

@@ -23,21 +23,29 @@
          <label class = "textstyle" for = "id_importance">Значимость вопроса (баллов за верный ответ от 1 до 10):</label>
          <input class ="form-control questionform_importance" min = "1" max = "10" type="number" name="importance" value="5" required="" id="id_importance" >
      </div>
-     <button type = "button" class="btn btn-primary plusBtn" name="button"> Add question </button>
-     <div class="form-group ansGroup" style = "margin-left: 450px;">
-       <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
-       <div id = "empty_form" class ="hidden" >
-     {{answer_form.as_p}}
-      </div>
 
-     </div>
-
+     <div class="form-group ans_group mx-auto" >
+       <button type = "button" class="btn btn-primary plusBtn" name="button"> Add question </button>
+         <div id = "empty_form" class = "empty_form" >
+       {{answer_form.as_p}}
+        </div>
+        <div class = "empty_form">
+      {{answer_form.as_p}}
+       </div>
+    </div>
+ <button type="submit" class="btn btn-success btn-md createQuestionButton">Сохранить вопрос</button>
  </form>
-<!-- {# <form action="{% url 'geturl' testid %}">#}
+
+<form action="{% url 'geturl' testid %}">#}
   <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
-</form> -->
+</form>
 
 <style>
+
+        .ans_group{
+        border: 3px solid red;
+        margin: 5px;
+        }
 
         .hidden{
           display:none
@@ -93,22 +101,28 @@
 </style>
 
 <script defer>
-
-const plusBtn = document.querySelector('.plusBtn')
-plusBtn.addEventListener('click', function handler() {
-  const emptyForm = document.querySelector('#empty_form')
-  console.log(emptyForm)
-  // const emptyForm = document.getElementById('empty_form')
-  let newForm = emptyForm.сloneNode(true)
-  newForm.classList.remove("hidden")
-  const ansGroup = document.querySelector(".ansGroup")
-  ansGroup.appendChild(newForm)
-  console.log("событие было вызвано")
-handler() // Hidden Не обязателен.
-});
+  let num = 1
+  const plusBtn = document.querySelector('.plusBtn')
+  plusBtn.addEventListener('click', function handler() {
+    const emptyForm = document.querySelector('#empty_form')
+    let newForm = emptyForm.cloneNode(true)
+    newForm.setAttribute("id", `form${num}`)
+    newForm.setAttribute("name", `form${num}`)
+    num += 1
+    const ansGroup = document.querySelector(".ans_group")
+    ansGroup.appendChild(newForm)
+  });
 </script>
 
 {% endblock %}
+
+
+
+
+
+
+
+
 {% block answer%}
 {% for question in previous_questions %}
 <!-- some text and form:
