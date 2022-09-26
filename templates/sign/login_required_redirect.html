@@ -1,0 +1,22 @@
+{% extends 'base_with_sidebar.html' %}
+
+{% block login_required_message %}
+<div class = "text-wrapper centrate cent" >
+  Для просмотра данного раздела Вам необходимо
+  <a href = "{% url 'login_form' %}">войти</a>.
+</div>
+
+<style>
+  .centrate {
+    font-size:30px;
+    margin:auto;
+    color: white;
+  }
+
+  .cent{
+    margin-left: 20%;
+    <!-- margin-top: 20%; -->
+    display:float;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends 'base_with_sidebar.html' %}
+
+{% block show_test_form %}
+
+<form action="#" method="POST"> {% csrf_token %}
+    <div class="form-group testformstr">
+        <!--            <label for="id_title">Название теста:</label>-->
+        <input type="text" class="form-control" aria-describedby="emailHelp" placeholder="Название теста" name="title"
+               maxlength="100" required="" id="id_title">
+    </div>
+    <div class="form-group testformtxt">
+        <div>
+            <!--                <label for="id_description">Описание:</label>-->
+            <textarea class="form-control" name="description" cols="40" rows="10" id="id_description"
+                      placeholder="Описание теста"></textarea>
+            <button type="submit" class="btn btn-success btn-md createTestButton"> Продолжить</button>
+        </div>
+    </div>
+</form>
+
+{% csrf_token %}
+
+{% comment %}
+{{form_test}}
+{% endcomment%}
+
+
+<!--    <div class="form-group">-->
+<!--    <label for="id_title">Название теста:</label>-->
+<!--      <input type="text" name="title" maxlength="100" required="" id="id_title">-->
+<!--    <label for="id_description">Описание:</label>-->
+<!--      <textarea name="description" cols="40" rows="10" id="id_description"></textarea>-->
+<!--        <button type="submit" class="btn btn-success btn-md"> Продолжить </button>-->
+<!--    </div>-->
+<!--    </div>-->
+<!--</form>-->
+<style>
+        .testformstr{
+        margin-top: 50px;
+        width:700px;
+        margin-left: 500px;
+        }
+
+        .testformtxt{
+        margin-top: 10px;
+        width:700px;
+        margin-left: 500px;
+        }
+
+        .createTestButton{
+        margin: 10px;
+        float:right;
+        }
+
+</style>
+
+
+{% endblock %}

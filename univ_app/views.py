@@ -11,8 +11,6 @@ from django.contrib.auth.decorators import login_required
 
 
 
-# Create your views here.
-
 def get_client_ip(request):
     x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
     if x_forwarded_for:
@@ -28,7 +26,7 @@ class General:
         "state_of_user" : request.user.is_authenticated
         }
 
-        return render(request, "very_first_page.html", ctx)
+        return render(request, "homepage.html", ctx)
 
     def createtest_form(request):
         if request.method == "POST":
@@ -147,7 +145,7 @@ class General:
         "the_test":the_test,
         "the_questions" : the_questions,
         }
-        return render(request,"test_taking/start_a_test.html", ctx )
+        return render(request,"take_test/start_a_test.html", ctx )
 
 
     def test_taking(request, testid, current_question_num):
@@ -167,7 +165,7 @@ class General:
             "the_answers" : the_answers,
             "the_test" : the_test,
         }
-        return render(request,"test_taking/test_taking.html", ctx )
+        return render(request,"take_test/take_test.html", ctx )
 
 
     def login_form(request):

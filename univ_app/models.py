@@ -6,8 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Test(models.Model):
     title = models.CharField(max_length=100 )
     slug = models.SlugField(max_length = 120 , blank = True, null = True)
-    description = models.TextField(blank = True )
-    score = models.IntegerField(default = 0)
+    description = models.TextField(blank = True)
     link = models.CharField(max_length=1000, default = '')
 
     def save(self, *args, **kwargs):
