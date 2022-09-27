@@ -58,6 +58,8 @@ class QuestionForm(forms.ModelForm):
             "importance" : "Очков за вопрос (важность вопроса)",
         }
 
+
+
 class AnswerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs) #parent class
@@ -79,6 +81,8 @@ class AnswerForm(forms.ModelForm):
             "is_right" : "Ответ является правильным ",
             'answer': "Ответ",
         }
+
+
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
