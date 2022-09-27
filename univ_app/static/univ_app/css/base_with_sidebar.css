@@ -20,36 +20,14 @@ body{
   height: 757px;
   width: 100%;
   background: white;
-  float:left;
+  display:block;
   padding:10px;
 }
 
-.content{
-  height:100%;
-  width:80%;
-  border-radius: 25px;
-  background-color:#9d55e6;
-  float:left;
-}
-
-.sidebar1{
-  float:left;
-  height:100%;
-  width:20%;
-  background-color:white;
-  padding: 10px;
-}
-
-.sidebar1-content{
-  height:100%;
-  width:100%;
-  border-radius: 25px;
-  background-color:green;
-  text-align: center;
-}
 
 
 
+/*
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 
 body {
@@ -123,4 +101,4 @@ button {
 .row-2{
 
     background-color: #28323C !important;
-}
+} */

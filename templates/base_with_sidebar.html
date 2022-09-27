@@ -1,10 +1,11 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="{% static 'univ_app/css/base_with_sidebar.css' %}">
+<link rel="stylesheet" href="{% static 'univ_app/css/base.css' %}">
   <head>
     <meta charset="utf-8">
     <title></title>
@@ -55,6 +56,34 @@
 
   </body>
 </html>
+
+<style>
+
+.content{
+  height:100%;
+  width:80%;
+  border-radius: 25px;
+  background-color:#9d55e6;
+  float:left;
+}
+
+.sidebar1{
+  float:left;
+  height:100%;
+  width:20%;
+  background-color:white;
+  padding: 10px;
+}
+
+.sidebar1-content{
+  height:100%;
+  width:100%;
+  border-radius: 25px;
+  background-color:green;
+  text-align: center;
+}
+
+</style>
 
 <!-- <style>
 .content{
