@@ -3,6 +3,22 @@ from django import forms
 from django.contrib.auth.models import User
 
 
+class AnswerFormNotModel(forms.Form):
+    answer = forms.CharField(max_length=200, widget = forms.Textarea ) #, widget = forms.Textarea
+    is_right = forms.BooleanField(required = False)
+
+    is_right.widget.attrs.update({'value':"answer1",'placeholder':'Является верным'})
+    answer.widget.attrs.update({'cols':'90','rows':'1', 'placeholder':'Ответ'})
+
+
+
+
+
+
+
+
+
+
 class ChangeUserForm(forms.Form):
     first_name = forms.CharField()
     last_name = forms.CharField()
@@ -37,11 +53,10 @@ class TestForm(forms.ModelForm):
             'image': "Картинка",
         }
 
-# class AnswerFormNotModel(forms.Form):
-#     answer = forms.CharField(max_length=1000)
-#     was_chosen = forms.BooleanField()
-#     is_right = forms.BooleanField()
-#     related_question = forms.ModelChoiceField #integerField
+
+
+
+
 
 
 

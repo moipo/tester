@@ -36,17 +36,39 @@ class General:
         }
         return render(request, "create_test/create_test.html", ctx)
 
-
     def create_questions(request, testid):
         if request.method == "POST":
-            pass
+            print(request.POST)
 
-        answer_form = AnswerForm()
-        ctx = {
-        "answer_form" : answer_form,
-        'testid': testid,
-        }
-        return render(request,"create_test/create_questions.html", ctx)
+            the_test = Test.objects.get(id = testid)
+            previous_questions = Question.get_test_questions(the_test)
+
+            answer_form_not_model = AnswerFormNotModel()
+            ctx = {
+            "answer_form_not_model" : answer_form_not_model,
+            'testid': testid,
+            'previous_questions' : previous_questions,
+            }
+            return render(request,"create_test/create_questions.html", ctx)
+
+        else:
+            answer_form_not_model = AnswerFormNotModel()
+            ctx = {
+            "answer_form_not_model" : answer_form_not_model,
+            'testid': testid,
+            }
+            return render(request,"create_test/create_questions.html", ctx)
+
+    # def create_questions(request, testid):
+    #     if request.method == "POST":
+    #         pass
+    #
+    #     answer_form = AnswerForm()
+    #     ctx = {
+    #     "answer_form" : answer_form,
+    #     'testid': testid,
+    #     }
+    #     return render(request,"create_test/create_questions.html", ctx)
 
 
     def geturl(request, testid):
