@@ -14,7 +14,7 @@
     </div>
   </div> -->
 
-  <form action = "{% url 'test_taking' the_test.id 0 %}">
+  <form action = "{% url 'take_test' the_test.id 0 %}">
       <ul>
         {% for answer in the_answers %}
           <li>{{answer}}</li>

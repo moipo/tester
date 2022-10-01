@@ -40,8 +40,31 @@ class General:
         if request.method == "POST":
             print(request.POST)
 
+            question = request.POST.get('question')
+
             the_test = Test.objects.get(id = testid)
             previous_questions = Question.get_test_questions(the_test)
+
+
+            the_question = Question.objects.create(question = question, related_test = the_test)
+
+            answers = request.POST.getlist('answer')
+            is_right = request.POST.getlist('is_right')
+            print(answers)
+            print(is_right)
+
+            ans_obj = Answer()
+            for number, answer in enumerate(answers, 1):
+                 ans_obj.answer = answer
+                 ans_obj.is_right = number in is_right
+                 ans_obj.related_question = the_question
+                 ans_obj.save()
+
+
+
+
+
+
 
             answer_form_not_model = AnswerFormNotModel()
             ctx = {
@@ -92,7 +115,7 @@ class General:
         return render(request,"take_test/start_a_test.html", ctx )
 
 
-    def test_taking(request, testid, current_question_num):
+    def take_test(request, testid, current_question_num):
         the_test = Test.objects.get(pk = testid)
         question_set = Question.get_test_questions(the_test)
         this_question = None
@@ -110,6 +133,25 @@ class General:
             "the_test" : the_test,
         }
         return render(request,"take_test/take_test.html", ctx )
+
+    # def test_taking(request, testid, current_question_num):
+    #     the_test = Test.objects.get(pk = testid)
+    #     question_set = Question.get_test_questions(the_test)
+    #     this_question = None
+    #
+    #     this_question = question_set[current_question_num]
+    #     next_question_num = current_question_num + 1
+    #     if len(question_set) < next_question_num:
+    #         next_question = 999999
+    #
+    #     the_answers = Answer.get_answers(this_question)
+    #     ctx = {
+    #         "this_question": this_question,
+    #         "next_question_num": next_question_num,
+    #         "the_answers" : the_answers,
+    #         "the_test" : the_test,
+    #     }
+    #     return render(request,"take_test/take_test.html", ctx )
 
 
     def login_form(request):

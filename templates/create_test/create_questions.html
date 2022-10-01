@@ -35,7 +35,7 @@
 
                 <p>
                   <label for="id_is_right">Is right:</label>
-                  <input type="checkbox" name="is_right" id="id_is_right" value = "answer2">
+                  <input type="checkbox" name="is_right" id="id_is_right" value = "2">
                   <!-- <input type="hidden" name="hidden_checkbox" id="hidden_checkbox" value ="off" > -->
                 </p>
               </div>
@@ -78,11 +78,15 @@
 
         let checkbox = newForm.lastElementChild.lastElementChild
         checkbox.setAttribute("id", "")
-        checkbox.setAttribute("value", `answer${num}`)
+        checkbox.setAttribute("value", `${num}`)
 
 
 
         console.log(newForm.lastElementChild.lastElementChild)
+
+        // answer = newForm.firstElementChild.lastElementChild
+        // answer.setAttribute("id", "")
+
 
         num += 1
         const ansGroup = document.querySelector(".ans_group")
