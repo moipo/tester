@@ -28,11 +28,13 @@ class TestForm(forms.ModelForm):
         fields = [
             'title',
             'description',
+            'image',
         ]
 
         labels = {
             "title" : "Название теста",
             "description" : "Описание",
+            'image': "Картинка",
         }
 
 # class AnswerFormNotModel(forms.Form):
@@ -50,12 +52,10 @@ class QuestionForm(forms.ModelForm):
         model = Question
         fields = [
             'question',
-            'importance',
         ]
 
         labels = {
             "question" : "Текст вопроса",
-            "importance" : "Очков за вопрос (важность вопроса)",
         }
 
 

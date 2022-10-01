@@ -1,13 +1,13 @@
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator
 from django.utils.text import slugify
 
 
 class Test(models.Model):
-    title = models.CharField(max_length=100 )
+    title = models.CharField(max_length=100)
     slug = models.SlugField(max_length = 120 , blank = True, null = True)
-    description = models.TextField(blank = True)
+    description = models.TextField(blank = True, default = "")
     link = models.CharField(max_length=1000, default = '')
+    image = models.ImageField(upload_to = "uploads/Y%/%m/%d", blank = True , default = "test.png")
 
     def save(self, *args, **kwargs):
         if self.slug is None:
@@ -29,18 +29,13 @@ class Test(models.Model):
 
 class Question(models.Model):
     question = models.TextField(default = "")
-    importance = models.IntegerField(default = 5, validators=[
-        MaxValueValidator(10),
-        MinValueValidator(1),
-    ])
-    related_test = models.ForeignKey("Test", on_delete=models.CASCADE, null=True )
     answered_correctly = models.BooleanField(default = False)
-
+    related_test = models.ForeignKey("Test", on_delete=models.CASCADE, null=True )
 
     def __str__(self):
         return self.question
 
-    #property
+
     def get_test_questions(the_test:Test):
         the_questions = Question.objects.filter(related_test = the_test)
         return the_questions
@@ -59,7 +54,6 @@ class Answer(models.Model):
 
     def get_answers(the_question:Question):
         the_answers = Answer.objects.filter(related_question = the_question)
-        print(the_answers)
         return the_answers
 
     def __repr__(self):

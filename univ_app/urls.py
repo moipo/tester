@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from .views import *
 
 urlpatterns = [
@@ -15,4 +17,4 @@ urlpatterns = [
     path('access_denied/', General.access_denied, name = "access_denied"),
     path('show_my_profile/', General.show_my_profile, name = "show_my_profile"),
     path('show_change_user_credentials/', General.show_change_user_credentials, name = "show_change_user_credentials"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
