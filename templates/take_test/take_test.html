@@ -16,7 +16,7 @@
     </div>
   </div> -->
 
-  <form action = "{% url 'take_test' the_test.id next_question_num %}">
+  <form action = "{% url 'take_test' the_test.id next_question_num %}" method = "POST"> {%csrf_token%}
       <ul>
         {% for answer in the_answers %}
           <li>{{answer}}</li>
