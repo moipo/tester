@@ -7,11 +7,14 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
+from django.views.generic import ListView
 
 
 
 
-
+class TestList(ListView):
+    model = Test
+    template_name = "storage/test_list.html"
 
 
 class General:
@@ -141,7 +144,7 @@ class General:
             }
             return render(request,"take_test/take_test.html", ctx )
 
-            
+
         else:
 
 

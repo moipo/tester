@@ -17,4 +17,5 @@ urlpatterns = [
     path('access_denied/', General.access_denied, name = "access_denied"),
     path('show_my_profile/', General.show_my_profile, name = "show_my_profile"),
     path('show_change_user_credentials/', General.show_change_user_credentials, name = "show_change_user_credentials"),
+    path('storage/test_list', TestList.as_view(), name = "test_list"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
