@@ -53,8 +53,9 @@ class General:
             print(answers)
             print(is_right)
 
-            ans_obj = Answer()
+
             for number, answer in enumerate(answers, 1):
+                 ans_obj = Answer()
                  ans_obj.answer = answer
                  ans_obj.is_right = number in is_right
                  ans_obj.related_question = the_question
@@ -127,6 +128,7 @@ class General:
 
         the_answers = Answer.get_answers(this_question)
         ctx = {
+            "quantity_of_questions" : len(question_set),
             "this_question": this_question,
             "next_question_num": next_question_num,
             "the_answers" : the_answers,

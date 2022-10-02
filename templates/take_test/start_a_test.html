@@ -5,33 +5,38 @@
 
 <div class = 'container'>
   <br>
+  <img src="{{the_test.image.url}}" alt="" class = "center">
   <br>
-  <div class="border border-light p-3 mb-4 " style = "width: 50%; margin:auto; ">
-    <div class="text-nowrap red" style="width: 8rem; color: white; text-aligh">
+  <div class="border border-light p-3 mb-4">
+    <div class="text-wrap" style=" height: 1rem; width: 80%; color: white;">
       Название теста: {{the_test.title}}
     </div>
   </div>
+
+
   <div class="border border-light p-3 mb-4">
-    <div class="text-wrap" style="width: 8rem; color: white;">
-      Описание: {{the_test.description}}
+    <div class="text-wrap" style=" height: 7rem; width: 80%; color: white;">
+      Описание теста: {{the_test.description}}
     </div>
-    <div class="container question_box">
+  </div>
+  <form action = "{% url 'take_test' the_test.pk 0 %}">
+      <button type="submit" class = "btn btn-success btn-lg center" name="button">Начать тест</button>
+  </form>
+    <!-- <div class="container question_box">
       <ul>
       {%for question in the_questions%}
         <li>{{question}} </li>
       {% endfor %}
       </ul>
-    </div>
-  </div>
+    </div> -->
 </div>
 
 
-<form action = "{% url 'take_test' the_test.pk 0 %}">
-    <button type="submit" class = "btn btn-success btn-lg midbtn" name="button">Начать тест</button>
-</form>
+
 
 <style>
   .question_box{
+    margin:35px;
     display:flex;
     background-color:green;
     width:200px;
@@ -39,5 +44,13 @@
     float:right;
     border: 3px solid orange;
   }
+
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 15%;
+  border-radius: 20px;
+}
 </style>
 {% endblock %}
