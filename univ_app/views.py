@@ -6,6 +6,7 @@ from django.urls import reverse
 from django.contrib.auth.models import User
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.forms import inlineformset_factory
 
 
 
@@ -24,10 +25,11 @@ class General:
 
     def create_test(request):
         if request.method == "POST":
-            form_result = TestForm(request.POST)
+            form_result = TestForm(request.POST ) #, request.FILES
             if form_result.is_valid():
                 test_instance = form_result.save()
                 return redirect('create_questions', test_instance.pk)
+
 
 
         form_test = TestForm()
@@ -35,6 +37,8 @@ class General:
             "form_test": form_test,
         }
         return render(request, "create_test/create_test.html", ctx)
+
+
 
     def create_questions(request, testid):
         if request.method == "POST":
@@ -108,16 +112,15 @@ class General:
 
     def start_a_test(request, testid):
         the_test = Test.objects.get(id = testid)
-        the_questions = Question.get_test_questions(the_test)
         ctx = {
         "the_test":the_test,
-        "the_questions" : the_questions,
         }
         return render(request,"take_test/start_a_test.html", ctx )
 
-
     def take_test(request, testid, current_question_num):
         if request.method == 'POST':
+
+
             print(request.POST)
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
@@ -137,25 +140,97 @@ class General:
                 "the_test" : the_test,
             }
             return render(request,"take_test/take_test.html", ctx )
+
+            
         else:
+
+
+
+            # получение вопросов
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
             this_question = None
 
+            # отправка вопроса и номера следующего
             this_question = question_set[current_question_num]
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num:
                 next_question = 999999
 
             the_answers = Answer.get_answers(this_question)
+
+            taken_test = TakenTest(score = 0, related_test = the_test)
+            given_answer_form = GivenAnswerForm()
+
+
+            answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
+
+            #formset
+
+            #передаем конкретного родителя
+            GivenAnswerFormSet = inlineformset_factory(
+            AnsweredQuestion ,
+            GivenAnswer, fields
+             = ("checked",) ,
+             can_delete_extra = False,
+             extra =  len(the_answers))
+
+
+            givenanswer_formset = GivenAnswerFormSet()
+
+            a_ga_zipped = zip(the_answers, givenanswer_formset)
+
             ctx = {
                 "quantity_of_questions" : len(question_set),
                 "this_question": this_question,
                 "next_question_num": next_question_num,
                 "the_answers" : the_answers,
+                "givenanswer_formset" : givenanswer_formset,
                 "the_test" : the_test,
+                "a_ga_zipped" : a_ga_zipped,
             }
             return render(request,"take_test/take_test.html", ctx )
+
+    # def take_test(request, testid, current_question_num):
+    #     if request.method == 'POST':
+    #         print(request.POST)
+    #         the_test = Test.objects.get(pk = testid)
+    #         question_set = Question.get_test_questions(the_test)
+    #         this_question = None
+    #
+    #         this_question = question_set[current_question_num]
+    #         next_question_num = current_question_num + 1
+    #         if len(question_set) < next_question_num:
+    #             next_question = 999999
+    #
+    #         the_answers = Answer.get_answers(this_question)
+    #         ctx = {
+    #             "quantity_of_questions" : len(question_set),
+    #             "this_question": this_question,
+    #             "next_question_num": next_question_num,
+    #             "the_answers" : the_answers,
+    #             "the_test" : the_test,
+    #         }
+    #         return render(request,"take_test/take_test.html", ctx )
+    #     else:
+    #         the_test = Test.objects.get(pk = testid)
+    #         question_set = Question.get_test_questions(the_test)
+    #         this_question = None
+    #
+    #         this_question = question_set[current_question_num]
+    #         next_question_num = current_question_num + 1
+    #         if len(question_set) < next_question_num:
+    #             next_question = 999999
+    #
+    #         the_answers = Answer.get_answers(this_question)
+    #         ctx = {
+    #             "quantity_of_questions" : len(question_set),
+    #             "this_question": this_question,
+    #             "next_question_num": next_question_num,
+    #             "the_answers" : the_answers,
+    #             "the_test" : the_test,
+    #         }
+    #         return render(request,"take_test/take_test.html", ctx )
 
     # def test_taking(request, testid, current_question_num):
     #     the_test = Test.objects.get(pk = testid)

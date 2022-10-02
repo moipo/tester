@@ -17,13 +17,25 @@
   </div> -->
 
   <form action = "{% url 'take_test' the_test.id next_question_num %}" method = "POST"> {%csrf_token%}
-      <ul>
+
+    <ul>
+      {% for answer, checkbox in a_ga_zipped %}
+        <li>{{forloop.counter}}: {{answer}} {{checkbox}}</li>
+
+        <!-- <input class="form-check-input" type="checkbox" name="" value=""> -->
+        <br>
+      {% endfor %}
+    </ul>
+
+
+
+      <!-- <ul>
         {% for answer in the_answers %}
           <li>{{answer}}</li>
           <input class="form-check-input" type="checkbox" name="" value="">
           <br>
         {% endfor %}
-      </ul>
+      </ul> -->
       <button type="submit" class = "btn btn-success btn-lg " name="button">Дать ответ</button>
   </form>
 </div>

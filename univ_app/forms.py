@@ -3,6 +3,14 @@ from django import forms
 from django.contrib.auth.models import User
 
 
+class GivenAnswerForm(forms.ModelForm):
+    class Meta:
+        model = GivenAnswer
+        fields = ("checked",)
+        labels = {"checked" : " "}
+
+
+
 class AnswerFormNotModel(forms.Form):
     answer = forms.CharField(max_length=200, widget = forms.Textarea ) #, widget = forms.Textarea
     is_right = forms.BooleanField(required = False)

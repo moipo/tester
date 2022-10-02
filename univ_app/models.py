@@ -7,7 +7,7 @@ class Test(models.Model):
     slug = models.SlugField(max_length = 120 , blank = True, null = True)
     description = models.TextField(blank = True, default = "")
     link = models.CharField(max_length=1000, default = '')
-    image = models.ImageField(upload_to = "uploads/Y%/%m/%d", blank = True , default = "test.png")
+    image = models.ImageField(upload_to = "uploads/Y%/%m/%d/", blank = True , null=True, default = "test.png")
 
     def save(self, *args, **kwargs):
         if self.slug is None:
@@ -61,3 +61,20 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer
+
+
+
+class TakenTest(models.Model):
+    related_test = models.ForeignKey ("Test", on_delete = models.CASCADE, null = True)
+    score = models.IntegerField()
+
+class AnsweredQuestion(models.Model):
+    related_taken_test = models.ForeignKey ("TakenTest", on_delete = models.CASCADE, null = True)
+    related_question = models.ForeignKey ("Question", on_delete = models.CASCADE, null = True)
+    correct = models.BooleanField(default = False)
+
+
+class GivenAnswer(models.Model):
+    related_answered_question = models.ForeignKey ("AnsweredQuestion", on_delete = models.CASCADE, null = True)
+    # related_answer = models.ForeignKey ("Answer", on_delete = models.CASCADE, null = True)
+    checked = models.BooleanField(default = False)
