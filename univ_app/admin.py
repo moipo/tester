@@ -12,3 +12,7 @@ class TestAdmin(admin.ModelAdmin):
     list_display = ["id", "title", "slug"]
 
 admin.site.register(Test, TestAdmin)
+
+admin.site.register(TakenTest)
+admin.site.register(AnsweredQuestion)
+admin.site.register(GivenAnswer)

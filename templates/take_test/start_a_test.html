@@ -19,7 +19,7 @@
       Описание теста: {{the_test.description}}
     </div>
   </div>
-  <form action = "{% url 'take_test' the_test.pk 0 %}"> {%csrf_token%}
+  <form action = "{% url 'take_test' the_test.pk 0 0 %}"> 
       <button type="submit" class = "btn btn-success btn-lg center" name="button">Начать тест</button>
   </form>
 </div>

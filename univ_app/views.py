@@ -120,32 +120,68 @@ class General:
         }
         return render(request,"take_test/start_a_test.html", ctx )
 
-    def take_test(request, testid, current_question_num):
+
+    def take_test(request, testid, current_question_num, taken_test_id):
+
         if request.method == 'POST':
 
-
-            print(request.POST)
+            # получение вопросов
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
             this_question = None
 
+            # отправка вопроса и номера следующего
             this_question = question_set[current_question_num]
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num:
                 next_question = 999999
 
+            taken_test = TakenTest.objects.get(id = taken_test_id)
+
+
+            GivenAnswerFormSet = inlineformset_factory(
+            AnsweredQuestion,
+            GivenAnswer,
+            fields = ("checked",) ,
+            labels = {"checked" : ""},
+            can_delete_extra = False,
+            extra = len(question_set),
+            )
+
+            formset = GivenAnswerFormSet(request.POST)
+            print(request.POST)
+            print(formset.is_valid())
+            if formset.is_valid():
+                formset.save()
+
             the_answers = Answer.get_answers(this_question)
+            answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
+            givenanswer_formset = GivenAnswerFormSet()
+            a_ga_zipped = zip(the_answers, givenanswer_formset)
+
+
             ctx = {
                 "quantity_of_questions" : len(question_set),
                 "this_question": this_question,
                 "next_question_num": next_question_num,
                 "the_answers" : the_answers,
+                "givenanswer_formset" : givenanswer_formset,
                 "the_test" : the_test,
+                "a_ga_zipped" : a_ga_zipped,
+                "taken_test" : taken_test,
             }
             return render(request,"take_test/take_test.html", ctx )
 
 
         else:
+
+            # 0 передается с представления start_a_test
+
+
+
+
+            #если get метод, то мы прежде чем отренедреить представление
+            #создадим тест
 
 
 
@@ -162,7 +198,18 @@ class General:
 
             the_answers = Answer.get_answers(this_question)
 
-            taken_test = TakenTest(score = 0, related_test = the_test)
+
+            # taken_test = None
+            # if taken_test_id == 0:
+            #     taken_test = TakenTest.objects.create(related_test = the_test, score = 0)
+            # if taken_test:
+            #     pass
+            # else:
+
+            #taken_test_id не используется в get запросе
+            taken_test = TakenTest.objects.create(score = 0, related_test = the_test)
+
+
             given_answer_form = GivenAnswerForm()
 
 
@@ -173,8 +220,9 @@ class General:
             #передаем конкретного родителя
             GivenAnswerFormSet = inlineformset_factory(
             AnsweredQuestion ,
-            GivenAnswer, fields
-             = ("checked",) ,
+            GivenAnswer,
+            fields = ("checked",) ,
+             labels = {"checked" : ""},
              can_delete_extra = False,
              extra =  len(the_answers))
 
@@ -191,6 +239,7 @@ class General:
                 "givenanswer_formset" : givenanswer_formset,
                 "the_test" : the_test,
                 "a_ga_zipped" : a_ga_zipped,
+                "taken_test" : taken_test,
             }
             return render(request,"take_test/take_test.html", ctx )
 
