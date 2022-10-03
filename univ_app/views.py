@@ -105,10 +105,16 @@ class General:
     def geturl(request, testid):
         path = reverse(General.start_a_test, args = [testid])
         yoururl = str(request.META["HTTP_HOST"])  + str(path)
+
+        the_test = Test.objects.get(id = testid)
+        the_test.link = yoururl
+        the_test.save()
+
         ctx = {
         "testid":testid,
         "yoururl": yoururl,
         }
+
         return render(request, "create_test/geturl.html", ctx)
 
 
@@ -150,9 +156,9 @@ class General:
 
             formset = GivenAnswerFormSet(request.POST)
             print(request.POST)
-            print(formset.is_valid())
-            if formset.is_valid():
-                formset.save()
+            # print(formset.is_valid())
+            # if formset.is_valid():
+            formset.save()
 
             the_answers = Answer.get_answers(this_question)
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)

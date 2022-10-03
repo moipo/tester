@@ -22,10 +22,10 @@
             <a class="nav-link" href="#">Как начать пользоваться<span class="sr-only"></span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Создать тест</a>
+            <a class="nav-link" href="{% url 'homepage' %}">Создать тест</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{% url 'statistics' %}">Статистика</a>
+            <a class="nav-link" href="{% url 'test_list' %}">Список тестов</a>
           </li>
           <li class="nav-item">
             {% if request.user.is_authenticated %}
