@@ -13,6 +13,7 @@ from django.views.generic import ListView
 
 
 class TestList(ListView):
+    paginate_by = 10
     model = Test
     template_name = "storage/test_list.html"
 

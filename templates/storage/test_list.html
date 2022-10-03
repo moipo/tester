@@ -2,7 +2,24 @@
 
 {%block test_list%}
 
+
 <div class ="container">
+  Страница {{page_obj.number}} из {{page_obj.paginator.num_pages}}:
+  <div class="container nested center" >
+
+
+      {% for page_num in page_obj.paginator.page_range %}
+      <div class=" page_num">
+      <a href="?page={{page_num}}">{{page_num}}</a>
+      </div>
+      {%endfor%}
+      <!-- {#{% for page in page_obj%}
+      {{page}}
+      {%endfor%} #} -->
+
+
+  </div>
+  <br>
   <table class = "table">
     <tr>
       <th>Название</th>
@@ -21,5 +38,20 @@
   </table>
 </div>
 
+<style>
+.nested{
+  height: 30px;
+  border: 2px solid red;
+  border-radius: 8px;
+  width:60%;
+}
+
+.page_num
+{
+  //border: 2px solid green;
+  border-radius: 5px;
+  display:inline-block;
+}
+</style>
 
 {%endblock%}
