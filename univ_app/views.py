@@ -157,9 +157,37 @@ class General:
 
             formset = GivenAnswerFormSet(request.POST)
             print(request.POST)
+            print()
+            print(formset)
+            print()
+            print(formset.errors)
+            print(formset.is_valid())
+            print(formset.save())
+
+            previous_answers = Answer.get_answers(question_set[current_question_num-1])
+            previous_given_answers = []
+
+            for i in range(len(previous_answers)):
+                previous_given_answers.append(request.POST.get(f"givenanswer_set-{i}-checked","off"))
+
+            print(previous_given_answers)
+
+
+
             # print(formset.is_valid())
             # if formset.is_valid():
-            formset.save()
+            # formset.save()
+
+            #manual save:
+
+
+
+
+
+
+
+
+
 
             the_answers = Answer.get_answers(this_question)
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
@@ -220,6 +248,7 @@ class General:
             given_answer_form = GivenAnswerForm()
 
 
+
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
 
             #formset
@@ -229,10 +258,15 @@ class General:
             AnsweredQuestion ,
             GivenAnswer,
             fields = ("checked",) ,
-             labels = {"checked" : ""},
-             can_delete_extra = False,
-             extra =  len(the_answers))
+            labels = {"checked" : ""},
+            can_delete_extra = False,
+            extra =  len(the_answers))
 
+
+            # data = {
+            # 'form-TOTAL_FORMS': str(len(the_answers)),
+            # 'form-INITIAL_FORMS': '0',
+            # }
 
             givenanswer_formset = GivenAnswerFormSet()
 
