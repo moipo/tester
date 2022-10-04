@@ -164,13 +164,34 @@ class General:
             print(formset.is_valid())
             print(formset.save())
 
-            previous_answers = Answer.get_answers(question_set[current_question_num-1])
+
+
+            previous_question = question_set[current_question_num-1]
+
+            prev_ans_quest = AnsweredQuestion()
+            prev_ans_quest.related_taken_test = taken_test
+            prev_ans_quest.related_question = previous_question
+            prev_ans_quest.save()
+
+
+            previous_answers = Answer.get_answers(previous_question)
             previous_given_answers = []
 
             for i in range(len(previous_answers)):
-                previous_given_answers.append(request.POST.get(f"givenanswer_set-{i}-checked","off"))
+                checked = request.POST.get(f"givenanswer_set-{i}-checked","off")
+                previous_given_answers.append(checked)
+                given_answer = GivenAnswer()
+                given_answer.checked = True if checked == "on" else False
+                given_answer.related_answered_question = prev_ans_quest
+                given_answer.save()
+
+
+            #all_prev_given_ans = GivenAnswer.objects.filter(related_answered_question = prev_ans_quest)
+
+            #prev_ans_quest.correct = all([ans.checked for ans in all_prev_given_ans])
 
             print(previous_given_answers)
+
 
 
 
