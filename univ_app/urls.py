@@ -18,4 +18,5 @@ urlpatterns = [
     path('show_my_profile/', General.show_my_profile, name = "show_my_profile"),
     path('show_change_user_credentials/', General.show_change_user_credentials, name = "show_change_user_credentials"),
     path('storage/test_list', TestList.as_view(), name = "test_list"),
+    path('show_result/<int:taken_test_id>', General.show_result, name = "show_result"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

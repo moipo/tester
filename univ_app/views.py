@@ -129,6 +129,9 @@ class General:
 
 
     def take_test(request, testid, current_question_num, taken_test_id):
+        if current_question_num == 999999:
+            return redirect(reverse('show_result', args=[taken_test_id]))
+
 
         if request.method == 'POST':
 
@@ -138,10 +141,14 @@ class General:
             this_question = None
 
             # отправка вопроса и номера следующего
-            this_question = question_set[current_question_num]
+            try:
+                this_question = question_set[current_question_num]
+            except:
+                return redirect(reverse('show_result', args=[taken_test_id]))
             next_question_num = current_question_num + 1
-            if len(question_set) < next_question_num:
+            if len(question_set) < next_question_num-1:
                 next_question = 999999
+                print("ПРИСВОЕНИЕ СРАБОТАЛО")
 
             taken_test = TakenTest.objects.get(id = taken_test_id)
 
@@ -305,6 +312,10 @@ class General:
             }
             return render(request,"take_test/take_test.html", ctx )
 
+
+    def show_result(request, taken_test_id):
+        ctx = {}
+        return render(request, "take_test/show_result.html", ctx)
     # def take_test(request, testid, current_question_num):
     #     if request.method == 'POST':
     #         print(request.POST)
