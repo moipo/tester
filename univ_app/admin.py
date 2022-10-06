@@ -13,6 +13,15 @@ class TestAdmin(admin.ModelAdmin):
 
 admin.site.register(Test, TestAdmin)
 
-admin.site.register(TakenTest)
-admin.site.register(AnsweredQuestion)
-admin.site.register(GivenAnswer)
+class TakenTestAdmin(admin.ModelAdmin):
+    list_display = ["id", "related_test", "score"]
+
+class AnsweredQuestionAdmin(admin.ModelAdmin):
+    list_display = ["id", "related_taken_test", "related_question", "correct"]
+
+class GivenAnswerAdmin(admin.ModelAdmin):
+    list_display = ["id","related_answered_question" , "checked"]
+
+admin.site.register(TakenTest,TakenTestAdmin)
+admin.site.register(AnsweredQuestion,AnsweredQuestionAdmin)
+admin.site.register(GivenAnswer,GivenAnswerAdmin)

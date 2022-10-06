@@ -145,6 +145,7 @@ class General:
                 this_question = question_set[current_question_num]
             except:
                 return redirect(reverse('show_result', args=[taken_test_id]))
+
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num-1:
                 next_question = 999999
@@ -314,7 +315,15 @@ class General:
 
 
     def show_result(request, taken_test_id):
-        ctx = {}
+        taken_test = TakenTest.objects.get(pk = taken_test_id)
+        answered_questions = AnsweredQuestion.objects.filter(related_taken_test = taken_test)
+        taken_test.score = sum([1 if ans_question.correct else 0 for ans_question in answered_questions])
+        taken_test.save()
+        q_amount = len(answered_questions)
+        ctx = {
+        "taken_test":taken_test,
+        "q_amount" : q_amount,
+        }
         return render(request, "take_test/show_result.html", ctx)
     # def take_test(request, testid, current_question_num):
     #     if request.method == 'POST':
