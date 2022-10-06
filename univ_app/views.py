@@ -179,11 +179,9 @@ class General:
 
 
             previous_answers = Answer.get_answers(previous_question)
-            previous_given_answers = []
 
             for i in range(len(previous_answers)):
                 checked = request.POST.get(f"givenanswer_set-{i}-checked","off")
-                previous_given_answers.append(checked)
                 given_answer = GivenAnswer()
                 print(True if checked == "on" else False)
                 given_answer.checked = True if checked == "on" else False
@@ -192,11 +190,23 @@ class General:
                 given_answer.save()
 
 
-            #all_prev_given_ans = GivenAnswer.objects.filter(related_answered_question = prev_ans_quest)
 
-            #prev_ans_quest.correct = all([ans.checked for ans in all_prev_given_ans])
 
-            print(previous_given_answers)
+
+            #was question answered right?
+            all_prev_given_ans = GivenAnswer.objects.filter(related_answered_question = prev_ans_quest)
+
+            prev_ans_quest.correct = all([ans.is_right == prev_ans.checked for ans, prev_ans in zip(previous_answers , all_prev_given_ans)])
+            prev_ans_quest.save()
+
+            # zip_comp = zip(previous_answers , all_prev_given_ans)
+            # for ans, given_ans in zip_comp:
+            #     print(ans.is_right, ' vs ', given_ans.checked)
+            # print("-------------")
+
+            # prev_ans_quest.correct = all([ans.checked for ans in all_prev_given_ans])
+
+            # print(previous_given_answers)
 
 
 
