@@ -129,8 +129,7 @@ class General:
 
 
     def take_test(request, testid, current_question_num, taken_test_id):
-        if current_question_num == 999999:
-            return redirect(reverse('show_result', args=[taken_test_id]))
+
 
 
         if request.method == 'POST':
@@ -141,10 +140,7 @@ class General:
             this_question = None
 
             # отправка вопроса и номера следующего
-            try:
-                this_question = question_set[current_question_num]
-            except:
-                return redirect(reverse('show_result', args=[taken_test_id]))
+
 
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num-1:
@@ -189,7 +185,9 @@ class General:
                 checked = request.POST.get(f"givenanswer_set-{i}-checked","off")
                 previous_given_answers.append(checked)
                 given_answer = GivenAnswer()
+                print(True if checked == "on" else False)
                 given_answer.checked = True if checked == "on" else False
+                print(given_answer.checked)
                 given_answer.related_answered_question = prev_ans_quest
                 given_answer.save()
 
@@ -213,7 +211,12 @@ class General:
 
 
 
-
+            if current_question_num == 999999:
+                return redirect(reverse('show_result', args=[taken_test_id]))
+            try:
+                this_question = question_set[current_question_num]
+            except:
+                return redirect(reverse('show_result', args=[taken_test_id]))
 
 
 
@@ -222,6 +225,9 @@ class General:
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
             givenanswer_formset = GivenAnswerFormSet()
             a_ga_zipped = zip(the_answers, givenanswer_formset)
+
+
+
 
 
             ctx = {
