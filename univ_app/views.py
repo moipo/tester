@@ -65,10 +65,14 @@ class General:
             for number, answer in enumerate(answers, 1):
                  ans_obj = Answer()
                  ans_obj.answer = answer
-                 ans_obj.is_right = (("answer" + str(number)) in is_right)
+                 ans_obj.is_right = str(number) in is_right
+                 # print( number, " not in ", is_right, end = "    ")
+                 # print(str(number) in is_right)
                  ans_obj.related_question = the_question
                  ans_obj.save()
 
+
+            # answers = Answer.objects.filter(related_question = the_question)
 
 
 
