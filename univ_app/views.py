@@ -406,6 +406,22 @@ class General:
     #     return render(request,"take_test/take_test.html", ctx )
 
 
+    def show_result_table(request, taken_test_id):
+        taken_test = TakenTest.objects.get(id = taken_test_id)
+        answered_questions = AnsweredQuestion.objects.filter(related_taken_test =  taken_test)
+
+        sets_of_ans = []
+        for a_q in answered_questions:
+            answers  = GivenAnswer.objects.filter(related_answered_question = a_q)
+            sets_of_ans += [answers]
+
+        ctx = {
+        "taken_test" : taken_test,
+        "answered_questions" : answered_questions,
+        "sets_of_ans" : sets_of_ans,
+        }
+        return render(request, 'take_test/show_result_table.html', ctx)
+
     def login_form(request):
         if request.method == "POST":
             username = request.POST.get("username")
