@@ -5,12 +5,43 @@
 <table class = "table">
   <tr>
     <th>Вопрос</th>
+    <th>Варианты ответов</th>
     <th>Правильный ответ</th>
     <th>Ваш ответ</th>
     <th>Результат</th>
   </tr>
   <tr>
-    
+    <td>{{questions.0}}</td>
+    <td>
+      {% for ans in ans_arr2d.0%}
+        {{forloop.counter}}: {{ans}}
+        <br>
+      {%endfor%}
+    </td>
+    <td>
+      {% for ans in ans_arr2d.0%}
+        {{forloop.counter}}: {{ans.is_right|yesno:"да,нет, "}}
+        <br>
+      {%endfor%}
+    </td>
+
+    <td>
+      {% for ans in given_ans_arr2d.0%}
+        {{forloop.counter}}: {{ans.checked|yesno:"да,нет, "}}
+        <br>
+      {%endfor%}
+    </td>
+    <td>
+      {{answered_questions.0.correct|yesno:"Правильный ответ, Неправильный ответ"}}
+    </td>
+  </tr>
+
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
 
 </table>

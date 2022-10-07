@@ -409,18 +409,35 @@ class General:
     def show_result_table(request, taken_test_id):
         taken_test = TakenTest.objects.get(id = taken_test_id)
         answered_questions = AnsweredQuestion.objects.filter(related_taken_test =  taken_test)
-
-        sets_of_ans = []
+        given_ans_arr2d = []
         for a_q in answered_questions:
             answers  = GivenAnswer.objects.filter(related_answered_question = a_q)
-            sets_of_ans += [answers]
+            given_ans_arr2d += [answers]
+
+
+            #TakenTest.objects.filter(pk = taken_test.related_test)
+        the_test = taken_test.related_test
+        questions = Question.objects.filter(related_test = the_test)
+        ans_arr2d = []
+        #right_ans_arr2d = []
+        for q in questions:
+            answers = Answer.objects.filter(related_question = q)
+            ans_arr2d += [answers]
+            #right_ans_arr2d += [[answer for answer in answers if answer.is_right]]
+
+
+
 
         ctx = {
         "taken_test" : taken_test,
         "answered_questions" : answered_questions,
-        "sets_of_ans" : sets_of_ans,
+        "given_ans_arr2d" : given_ans_arr2d,
+        "the_test": the_test,
+        "questions":questions,
+        "ans_arr2d":ans_arr2d,
         }
         return render(request, 'take_test/show_result_table.html', ctx)
+
 
     def login_form(request):
         if request.method == "POST":
