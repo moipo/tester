@@ -10,31 +10,33 @@
     <th>Ваш ответ</th>
     <th>Результат</th>
   </tr>
+  {% for zipped in all_zipped %}
   <tr>
-    <td>{{questions.0}}</td>
+    <!-- questions-->
+    <td>{{zipped.0}}</td>
     <td>
-      {% for ans in ans_arr2d.0%}
+      {% for ans in zipped.1%}
         {{forloop.counter}}: {{ans}}
         <br>
       {%endfor%}
     </td>
     <td>
-      {% for ans in ans_arr2d.0%}
+      {% for ans in zipped.1%}
         {{forloop.counter}}: {{ans.is_right|yesno:"да,нет, "}}
         <br>
       {%endfor%}
     </td>
-
     <td>
-      {% for ans in given_ans_arr2d.0%}
+      {% for ans in zipped.2%}
         {{forloop.counter}}: {{ans.checked|yesno:"да,нет, "}}
         <br>
       {%endfor%}
     </td>
     <td>
-      {{answered_questions.0.correct|yesno:"Правильный ответ, Неправильный ответ"}}
+      {{zipped.3.correct|yesno:"Правильный ответ, Неправильный ответ"}}
     </td>
   </tr>
+  {% endfor %}
 
   <tr>
     <td></td>

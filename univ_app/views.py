@@ -426,7 +426,7 @@ class General:
             #right_ans_arr2d += [[answer for answer in answers if answer.is_right]]
 
 
-
+        all_zipped = zip(questions,ans_arr2d,given_ans_arr2d,answered_questions)
 
         ctx = {
         "taken_test" : taken_test,
@@ -435,6 +435,7 @@ class General:
         "the_test": the_test,
         "questions":questions,
         "ans_arr2d":ans_arr2d,
+        "all_zipped" : all_zipped,
         }
         return render(request, 'take_test/show_result_table.html', ctx)
 
