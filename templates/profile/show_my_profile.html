@@ -1,4 +1,4 @@
-{% extends "base_with_sidebar.html" %}
+{% extends "base.html" %}
 
 {%block myprofile%}
 
@@ -9,7 +9,7 @@
   Хотите <a href="{% url 'log_out' %}">ВЫЙТИ?</a>
 </div>
 <div class="container">
-  <a href="{% url 'show_change_user_credentials' %}">Изменить данные</a>
+  <a href="{% url 'change_user_credentials' %}">Изменить данные</a>
 </div>
 {% endif %}
 
@@ -17,8 +17,8 @@
 .size{
   width:300px;
   height:200px;
-  margin-left: 350px;
-  margin-top:250px;
+  margin-left: 40%;
+  margin-top:10%;
   display: inline-block;
   float:left;
 }

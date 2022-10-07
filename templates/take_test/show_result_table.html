@@ -16,19 +16,19 @@
     <td>{{zipped.0}}</td>
     <td>
       {% for ans in zipped.1%}
-        {{forloop.counter}}: {{ans}}
+        {{forloop.counter}}:  {{ans}}
         <br>
       {%endfor%}
     </td>
     <td>
       {% for ans in zipped.1%}
-        {{forloop.counter}}: {{ans.is_right|yesno:"да,нет, "}}
+        {{forloop.counter}}:  {{ans.is_right|yesno:"+,-, "}}
         <br>
       {%endfor%}
     </td>
     <td>
       {% for ans in zipped.2%}
-        {{forloop.counter}}: {{ans.checked|yesno:"да,нет, "}}
+        {{forloop.counter}}:  {{ans.checked|yesno:"+,-, "}}
         <br>
       {%endfor%}
     </td>
@@ -38,13 +38,7 @@
   </tr>
   {% endfor %}
 
-  <tr>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
-  </tr>
+
 
 </table>
 

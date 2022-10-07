@@ -477,11 +477,10 @@ class General:
                 ctx = {
                     "user" : user,
                 }
-                return render(request, "profile/myprofile.html", ctx)
+                return render(request, "profile/show_my_profile.html", ctx)
             else:
                 user_form = UserForm()
-                ctx = { "error" :
-                "Такой пользователь уже существует! Используйте другой логин.",
+                ctx = { "error" : "Такой пользователь уже существует! Используйте другой логин.",
                 "user_form" : user_form,
                 }
                 return render(request, "sign/register.html", ctx)
@@ -496,8 +495,9 @@ class General:
     def log_out(request):
         if request.user.is_authenticated:
             logout(request)
-        return redirect(General.base)
+        return redirect(General.homepage)
 
+    #/access_denied
     @login_required(login_url = "/login_required/")
     def statistics(request):
         content = "<h1> СТАТИСТИКА ОТВЕТОВ НА ТЕСТЫ </h1>"
@@ -508,7 +508,7 @@ class General:
 
 
 
-    def show_change_user_credentials(request):
+    def change_user_credentials(request):
         form = ChangeUserForm()
         ctx = {
             "form":form
