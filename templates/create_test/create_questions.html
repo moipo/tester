@@ -79,8 +79,10 @@
         let checkbox = newForm.lastElementChild.lastElementChild
         checkbox.setAttribute("id", "")
         checkbox.setAttribute("value", `${num}`)
+        checkbox.checked = false
 
-
+        let textarea = newForm.firstElementChild.lastElementChild
+        textarea.value = ""
 
         console.log(newForm.lastElementChild.lastElementChild)
 
@@ -90,6 +92,8 @@
 
         num += 1
         const ansGroup = document.querySelector(".ans_group")
+
+
         ansGroup.appendChild(newForm)
       });
     </script>
