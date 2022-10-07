@@ -7,8 +7,8 @@ class Test(models.Model):
     slug = models.SlugField(max_length = 120 , blank = True, null = True)
     description = models.TextField(blank = True, default = "")
     link = models.CharField(max_length=1000, default = '')
-    image = models.ImageField(upload_to = "uploads/Y%/%m/%d/", blank = True , null=True, default = "test.png")
-
+    image = models.ImageField(upload_to = "uploads/", blank = True , null=True, default = "test.png")
+    #upload_to = "uploads/Y%/%m/%d/"
     def save(self, *args, **kwargs):
         if self.slug is None:
             self.slug = slugify(self.title)

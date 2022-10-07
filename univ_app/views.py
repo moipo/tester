@@ -30,8 +30,8 @@ class General:
 
 
     def create_test(request):
-        if request.method == "POST":
-            form_result = TestForm(request.POST ) #, request.FILES
+        if request.method == "POST": #,request.FILES
+            form_result = TestForm(request.POST,request.FILES ) #,
             if form_result.is_valid():
                 test_instance = form_result.save()
                 return redirect('create_questions', test_instance.pk)
@@ -500,11 +500,10 @@ class General:
             logout(request)
         return redirect(General.homepage)
 
-    #/access_denied
+
     @login_required(login_url = "/access_denied/")
-    def statistics(request):
-        content = "<h1> coming soon </h1>"
-        return HttpResponse(content)
+    def feedback(request):
+        return render(request,"profile/feedback.html",{})
 
     def access_denied(request):
         return render(request,"sign/login_required_redirect.html",{})
