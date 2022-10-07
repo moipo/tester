@@ -2,14 +2,14 @@
 
 {% block register %}
 
-
+<br>
 <div class="container reg-form">
   {% if error %}
   <p style = "color:red"> {{error}}</p>
   {% endif %}
   <form action = "{% url 'register' %}" method="post"> {% csrf_token %}
     {{user_form.as_p}}
-    <button type="submit" style = "margin-left: 60px;"> Login </button>
+    <button type="submit" style = "margin-left: 60px;"> Зарегистрироваться </button>
   </form>
 
 </div>
@@ -27,6 +27,7 @@
     height; 200px;
     padding: 40px;
     border-radius: 10px;
+    margin-top: 70px;
 
   }
 

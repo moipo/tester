@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
 
 {% block login_required_message %}
+<br>
 <div class = "text-wrapper centrate cent" >
   Для просмотра данного раздела Вам необходимо
-  <a href = "{% url 'login_form' %}">войти</a>.
+  <a href = "{% url 'login_form' %}" class = "text-warning">войти</a>.
 </div>
 
 <style>
@@ -14,8 +15,8 @@
   }
 
   .cent{
-    margin-left: 20%;
-    <!-- margin-top: 20%; -->
+    margin-left: 25%;
+    margin-top: 15%;
     display:float;
   }
 </style>
