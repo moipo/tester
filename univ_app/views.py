@@ -18,6 +18,8 @@ class TestList(ListView):
     template_name = "storage/test_list.html"
 
 
+
+
 class General:
 
     def homepage(request):
@@ -457,7 +459,7 @@ class General:
                 ctx = {
                     "user" : user,
                 }
-                return render(request, "profile/myprofile.html", ctx)
+                return render(request, "profile/show_my_profile.html", ctx)
         else:
             user_form = UserForm()
             ctx = {
@@ -477,6 +479,7 @@ class General:
                 ctx = {
                     "user" : user,
                 }
+                login(request, user)
                 return render(request, "profile/show_my_profile.html", ctx)
             else:
                 user_form = UserForm()
@@ -498,9 +501,9 @@ class General:
         return redirect(General.homepage)
 
     #/access_denied
-    @login_required(login_url = "/login_required/")
+    @login_required(login_url = "/access_denied/")
     def statistics(request):
-        content = "<h1> СТАТИСТИКА ОТВЕТОВ НА ТЕСТЫ </h1>"
+        content = "<h1> coming soon </h1>"
         return HttpResponse(content)
 
     def access_denied(request):
