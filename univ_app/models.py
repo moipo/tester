@@ -76,5 +76,4 @@ class AnsweredQuestion(models.Model):
 
 class GivenAnswer(models.Model):
     related_answered_question = models.ForeignKey ("AnsweredQuestion", on_delete = models.CASCADE, null = True)
-    # related_answer = models.ForeignKey ("Answer", on_delete = models.CASCADE, null = True)
     checked = models.BooleanField(default = False)

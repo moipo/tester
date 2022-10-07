@@ -12,37 +12,12 @@ class GivenAnswerForm(forms.ModelForm):
 
 
 class AnswerFormNotModel(forms.Form):
-    answer = forms.CharField(max_length=200, widget = forms.Textarea ) #, widget = forms.Textarea
+    answer = forms.CharField(max_length=200, widget = forms.Textarea )
     is_right = forms.BooleanField(required = False)
 
     is_right.widget.attrs.update({'value':"1",'placeholder':'Является верным'})
     answer.widget.attrs.update({'cols':'90','rows':'1', 'placeholder':'Ответ'})
 
-
-
-
-
-
-
-
-
-
-class ChangeUserForm(forms.Form):
-    first_name = forms.CharField()
-    last_name = forms.CharField()
-
-    def clean_first_name(self):
-        cleaned_data = self.cleaned_data #dictioary
-        first_name = cleaned_data.get('first_name')
-        if first_name.strip() == "Ivan": #Владиация немодельных форм.
-            raise forms.ValidationError("This name is taken")
-        return cleaned_data
-
-
-    def clean(self):
-        cleaned_data = self.cleaned_data
-        print(cleaned_data)
-        return cleaned_data
 
 
 
@@ -85,7 +60,7 @@ class QuestionForm(forms.ModelForm):
 
 class AnswerForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs) #parent class
+        super().__init__(*args, **kwargs)
         self.fields['answer'].widget.attrs.update(
         {'class': 'form-control',
          'style':' placeholder : "Вопрос"; width:700px; height:25px;  display:inline-block;',
@@ -109,7 +84,7 @@ class AnswerForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs) #parent class
+        super().__init__(*args, **kwargs) 
         self.fields['username'].widget.attrs.update(
         {'class': 'form-control',
          'style':' placeholder : "Логин"',})

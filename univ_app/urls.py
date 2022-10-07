@@ -20,5 +20,4 @@ urlpatterns = [
     path('storage/test_list', TestList.as_view(), name = "test_list"),
     path('show_result/<int:taken_test_id>', General.show_result, name = "show_result"),
     path('show_result_table/<int:taken_test_id>', General.show_result_table, name = "show_result_table"),
-
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

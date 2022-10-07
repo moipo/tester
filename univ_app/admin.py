@@ -1,10 +1,6 @@
 from django.contrib import admin
 from .models import *
 
-# Register your models here.
-
-# admin.site.register(Test)
-# admin.site.register(User)
 
 class AnswerAdmin(admin.ModelAdmin):
     list_display = [x.name for x in Answer._meta.fields]
@@ -25,14 +21,9 @@ class TakenTestAdmin(admin.ModelAdmin):
     list_display = ["id", "related_test", "score"]
 
 
-
-
-
-
 admin.site.register(Answer, AnswerAdmin)
 admin.site.register(Question, QuestionAdmin)
 admin.site.register(Test, TestAdmin)
-
 
 
 admin.site.register(GivenAnswer,GivenAnswerAdmin)

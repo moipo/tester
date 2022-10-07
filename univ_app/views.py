@@ -30,8 +30,8 @@ class General:
 
 
     def create_test(request):
-        if request.method == "POST": #,request.FILES
-            form_result = TestForm(request.POST,request.FILES ) #,
+        if request.method == "POST":
+            form_result = TestForm(request.POST,request.FILES )
             if form_result.is_valid():
                 test_instance = form_result.save()
                 return redirect('create_questions', test_instance.pk)
@@ -48,7 +48,6 @@ class General:
 
     def create_questions(request, testid):
         if request.method == "POST":
-            print(request.POST)
 
             question = request.POST.get('question')
 
@@ -60,26 +59,14 @@ class General:
 
             answers = request.POST.getlist('answer')
             is_right = request.POST.getlist('is_right')
-            print(answers)
-            print(is_right)
 
 
             for number, answer in enumerate(answers, 1):
                  ans_obj = Answer()
                  ans_obj.answer = answer
                  ans_obj.is_right = str(number) in is_right
-                 # print( number, " not in ", is_right, end = "    ")
-                 # print(str(number) in is_right)
                  ans_obj.related_question = the_question
                  ans_obj.save()
-
-
-            # answers = Answer.objects.filter(related_question = the_question)
-
-
-
-
-
 
             answer_form_not_model = AnswerFormNotModel()
             ctx = {
@@ -88,7 +75,6 @@ class General:
             'previous_questions' : previous_questions,
             }
             return render(request,"create_test/create_questions.html", ctx)
-
         else:
             answer_form_not_model = AnswerFormNotModel()
             ctx = {
@@ -96,18 +82,6 @@ class General:
             'testid': testid,
             }
             return render(request,"create_test/create_questions.html", ctx)
-
-    # def create_questions(request, testid):
-    #     if request.method == "POST":
-    #         pass
-    #
-    #     answer_form = AnswerForm()
-    #     ctx = {
-    #     "answer_form" : answer_form,
-    #     'testid': testid,
-    #     }
-    #     return render(request,"create_test/create_questions.html", ctx)
-
 
     def geturl(request, testid):
         path = reverse(General.start_a_test, args = [testid])
@@ -139,19 +113,14 @@ class General:
 
 
         if request.method == 'POST':
-
-            # получение вопросов
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
             this_question = None
-
-            # отправка вопроса и номера следующего
 
 
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num-1:
                 next_question = 999999
-                print("ПРИСВОЕНИЕ СРАБОТАЛО")
 
             taken_test = TakenTest.objects.get(id = taken_test_id)
 
@@ -166,13 +135,7 @@ class General:
             )
 
             formset = GivenAnswerFormSet(request.POST)
-            print(request.POST)
-            print()
-            print(formset)
-            print()
-            print(formset.errors)
-            print(formset.is_valid())
-            print(formset.save())
+
 
 
 
@@ -189,9 +152,7 @@ class General:
             for i in range(len(previous_answers)):
                 checked = request.POST.get(f"givenanswer_set-{i}-checked","off")
                 given_answer = GivenAnswer()
-                print(True if checked == "on" else False)
                 given_answer.checked = True if checked == "on" else False
-                print(given_answer.checked)
                 given_answer.related_answered_question = prev_ans_quest
                 given_answer.save()
 
@@ -199,32 +160,11 @@ class General:
 
 
 
-            #was question answered right?
+
             all_prev_given_ans = GivenAnswer.objects.filter(related_answered_question = prev_ans_quest)
 
             prev_ans_quest.correct = all([ans.is_right == prev_ans.checked for ans, prev_ans in zip(previous_answers , all_prev_given_ans)])
             prev_ans_quest.save()
-
-            # zip_comp = zip(previous_answers , all_prev_given_ans)
-            # for ans, given_ans in zip_comp:
-            #     print(ans.is_right, ' vs ', given_ans.checked)
-            # print("-------------")
-
-            # prev_ans_quest.correct = all([ans.checked for ans in all_prev_given_ans])
-
-            # print(previous_given_answers)
-
-
-
-
-            # print(formset.is_valid())
-            # if formset.is_valid():
-            # formset.save()
-
-            #manual save:
-
-
-
 
 
             if current_question_num == 999999:
@@ -261,22 +201,13 @@ class General:
 
         else:
 
-            # 0 передается с представления start_a_test
 
 
 
-
-            #если get метод, то мы прежде чем отренедреить представление
-            #создадим тест
-
-
-
-            # получение вопросов
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
             this_question = None
 
-            # отправка вопроса и номера следующего
             this_question = question_set[current_question_num]
             next_question_num = current_question_num + 1
             if len(question_set) < next_question_num:
@@ -285,14 +216,7 @@ class General:
             the_answers = Answer.get_answers(this_question)
 
 
-            # taken_test = None
-            # if taken_test_id == 0:
-            #     taken_test = TakenTest.objects.create(related_test = the_test, score = 0)
-            # if taken_test:
-            #     pass
-            # else:
 
-            #taken_test_id не используется в get запросе
             taken_test = TakenTest.objects.create(score = 0, related_test = the_test)
 
 
@@ -302,9 +226,6 @@ class General:
 
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
 
-            #formset
-
-            #передаем конкретного родителя
             GivenAnswerFormSet = inlineformset_factory(
             AnsweredQuestion ,
             GivenAnswer,
@@ -313,11 +234,6 @@ class General:
             can_delete_extra = False,
             extra =  len(the_answers))
 
-
-            # data = {
-            # 'form-TOTAL_FORMS': str(len(the_answers)),
-            # 'form-INITIAL_FORMS': '0',
-            # }
 
             givenanswer_formset = GivenAnswerFormSet()
 
@@ -347,65 +263,6 @@ class General:
         "q_amount" : q_amount,
         }
         return render(request, "take_test/show_result.html", ctx)
-    # def take_test(request, testid, current_question_num):
-    #     if request.method == 'POST':
-    #         print(request.POST)
-    #         the_test = Test.objects.get(pk = testid)
-    #         question_set = Question.get_test_questions(the_test)
-    #         this_question = None
-    #
-    #         this_question = question_set[current_question_num]
-    #         next_question_num = current_question_num + 1
-    #         if len(question_set) < next_question_num:
-    #             next_question = 999999
-    #
-    #         the_answers = Answer.get_answers(this_question)
-    #         ctx = {
-    #             "quantity_of_questions" : len(question_set),
-    #             "this_question": this_question,
-    #             "next_question_num": next_question_num,
-    #             "the_answers" : the_answers,
-    #             "the_test" : the_test,
-    #         }
-    #         return render(request,"take_test/take_test.html", ctx )
-    #     else:
-    #         the_test = Test.objects.get(pk = testid)
-    #         question_set = Question.get_test_questions(the_test)
-    #         this_question = None
-    #
-    #         this_question = question_set[current_question_num]
-    #         next_question_num = current_question_num + 1
-    #         if len(question_set) < next_question_num:
-    #             next_question = 999999
-    #
-    #         the_answers = Answer.get_answers(this_question)
-    #         ctx = {
-    #             "quantity_of_questions" : len(question_set),
-    #             "this_question": this_question,
-    #             "next_question_num": next_question_num,
-    #             "the_answers" : the_answers,
-    #             "the_test" : the_test,
-    #         }
-    #         return render(request,"take_test/take_test.html", ctx )
-
-    # def test_taking(request, testid, current_question_num):
-    #     the_test = Test.objects.get(pk = testid)
-    #     question_set = Question.get_test_questions(the_test)
-    #     this_question = None
-    #
-    #     this_question = question_set[current_question_num]
-    #     next_question_num = current_question_num + 1
-    #     if len(question_set) < next_question_num:
-    #         next_question = 999999
-    #
-    #     the_answers = Answer.get_answers(this_question)
-    #     ctx = {
-    #         "this_question": this_question,
-    #         "next_question_num": next_question_num,
-    #         "the_answers" : the_answers,
-    #         "the_test" : the_test,
-    #     }
-    #     return render(request,"take_test/take_test.html", ctx )
 
 
     def show_result_table(request, taken_test_id):
@@ -416,17 +273,12 @@ class General:
             answers  = GivenAnswer.objects.filter(related_answered_question = a_q)
             given_ans_arr2d += [answers]
 
-
-            #TakenTest.objects.filter(pk = taken_test.related_test)
         the_test = taken_test.related_test
         questions = Question.objects.filter(related_test = the_test)
         ans_arr2d = []
-        #right_ans_arr2d = []
         for q in questions:
             answers = Answer.objects.filter(related_question = q)
             ans_arr2d += [answers]
-            #right_ans_arr2d += [[answer for answer in answers if answer.is_right]]
-
 
         all_zipped = zip(questions,ans_arr2d,given_ans_arr2d,answered_questions)
 
@@ -519,7 +371,6 @@ class General:
             form = ChangeUserForm(request.POST)
             ctx['form'] = form
             if form.is_valid():
-                print("form is valid")
                 first_name = form.cleaned_data.get("first_name")
                 last_name = form.cleaned_data.get("last_name")
                 this_user = request.user
