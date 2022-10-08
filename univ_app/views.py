@@ -119,8 +119,15 @@ class General:
 
             taken_test = TakenTest.objects.get(id = taken_test_id)
 
-            next_question = question_set.get(current_question_num,3) #выход за пределы индекса
-            next_answers = Answer.objects.filter(related_question = next_question) #cannot unpack non-iterable
+            ans_length = 2
+            try:
+                next_question = question_set[current_question_num] #выход за пределы индекса
+                print(next_question)
+                if next_question is not None:
+                    next_answers = Answer.objects.filter(related_question = next_question) #cannot unpack non-iterable
+                    ans_length = len(next_answers)
+            except: pass
+
 
             GivenAnswerFormSet = inlineformset_factory(
             AnsweredQuestion,
@@ -128,7 +135,7 @@ class General:
             fields = ("checked",) ,
             labels = {"checked" : ""},
             can_delete_extra = False,
-            extra = len(next_answers),
+            extra = ans_length,
             )
 
             #formset = GivenAnswerFormSet(request.POST)
