@@ -84,7 +84,7 @@ class AnswerForm(forms.ModelForm):
 
 class UserForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs) 
+        super().__init__(*args, **kwargs)
         self.fields['username'].widget.attrs.update(
         {'class': 'form-control',
          'style':' placeholder : "Логин"',})
@@ -98,3 +98,8 @@ class UserForm(forms.ModelForm):
         'username',
         'password',
         ]
+        labels = {
+        "username" : "имя пользователя",
+        "password" : "пароль"
+        }
+        help_texts = {'username' : " "}
