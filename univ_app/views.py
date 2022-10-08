@@ -119,6 +119,8 @@ class General:
 
             taken_test = TakenTest.objects.get(id = taken_test_id)
 
+            next_question = question_set.get(current_question_num,3) #выход за пределы индекса
+            next_answers = Answer.objects.filter(related_question = next_question) #cannot unpack non-iterable
 
             GivenAnswerFormSet = inlineformset_factory(
             AnsweredQuestion,
@@ -126,10 +128,10 @@ class General:
             fields = ("checked",) ,
             labels = {"checked" : ""},
             can_delete_extra = False,
-            extra = len(question_set),
+            extra = len(next_answers),
             )
 
-            formset = GivenAnswerFormSet(request.POST)
+            #formset = GivenAnswerFormSet(request.POST)
 
 
 
