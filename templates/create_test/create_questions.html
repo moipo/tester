@@ -12,6 +12,10 @@
 
 {% block questions_form %}
 
+<form action="{% url 'geturl' testid %}"> {%csrf_token%}
+  <button class = "btn btn-danger btn-lg ready_btn" type="submit" name="button">Тест готов</button>
+</form>
+
    <form class = "white_text" action = "#" method="POST"> {% csrf_token %}
        <div class="form-group testformtxt mb-1">
            <textarea class ="form-control"  name="question" cols="40" rows="10" required="" id="id_question" placeholder = "Текст вопроса"></textarea>
@@ -40,9 +44,6 @@
                 </p>
               </div>
 
-
-
-
          </div>
 
 
@@ -50,9 +51,7 @@
 
 
 
-    <form action="{% url 'geturl' testid %}"> {%csrf_token%}
-      <button class = "btn btn-danger btn-lg finish" type="submit" name="button">Тест готов</button>
-    </form>
+
 
     <script defer>
 
@@ -99,6 +98,15 @@
     </script>
 
 <style>
+
+        .ready_btn{
+          display: inline;
+          float:right;
+          margin:50px;
+          margin-top: 40%;
+
+        }
+
         .white_text{
           color:white;
         }

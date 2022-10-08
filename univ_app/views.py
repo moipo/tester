@@ -21,22 +21,18 @@ class TestList(ListView):
 
 
 class General:
-
     def homepage(request):
         ctx = {
         "state_of_user" : request.user.is_authenticated
         }
         return render(request, "homepage/homepage.html", ctx)
 
-
     def create_test(request):
         if request.method == "POST":
-            form_result = TestForm(request.POST,request.FILES )
+            form_result = TestForm(request.POST,request.FILES)
             if form_result.is_valid():
                 test_instance = form_result.save()
                 return redirect('create_questions', test_instance.pk)
-
-
 
         form_test = TestForm()
         ctx = {
@@ -53,7 +49,6 @@ class General:
 
             the_test = Test.objects.get(id = testid)
             previous_questions = Question.get_test_questions(the_test)
-
 
             the_question = Question.objects.create(question = question, related_test = the_test)
 
@@ -198,12 +193,7 @@ class General:
             }
             return render(request,"take_test/take_test.html", ctx )
 
-
         else:
-
-
-
-
             the_test = Test.objects.get(pk = testid)
             question_set = Question.get_test_questions(the_test)
             this_question = None
@@ -215,14 +205,9 @@ class General:
 
             the_answers = Answer.get_answers(this_question)
 
-
-
             taken_test = TakenTest.objects.create(score = 0, related_test = the_test)
 
-
             given_answer_form = GivenAnswerForm()
-
-
 
             answered_question = AnsweredQuestion(related_taken_test = taken_test, related_question = this_question)
 
