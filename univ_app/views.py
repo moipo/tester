@@ -322,11 +322,10 @@ class General:
             user = authenticate(request, username = username, password = password)
             if user is None:
                 user = User.objects.create_user(username = username, password = password)
-                ctx = {
-                    "user" : user,
-                }
-                login(request, user)
-                return render(request, "profile/show_my_profile.html", ctx)
+                # ctx = {
+                #     "user" : user,
+                # }
+                return render(request, "sign/successful_registration.html", {})
             else:
                 user_form = UserForm()
                 ctx = { "error" : "Такой пользователь уже существует! Используйте другой логин.",
