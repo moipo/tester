@@ -79,19 +79,17 @@ class General:
             return render(request,"create_test/create_questions.html", ctx)
 
     def geturl(request, testid):
-        
+
         the_test = Test.objects.get(id = testid)
 
         questions = Question.objects.filter(related_test=the_test)
         if len(questions)==0:
             the_test.delete()
-            the_test.save()
             return render(request, "create_test/cant_create_test.html", {})
 
         path = reverse(General.start_a_test, args = [testid])
         yoururl = str(request.META["HTTP_HOST"])  + str(path)
 
-        #the_test = Test.objects.get(id = testid)
         the_test.link = yoururl
         the_test.save()
 
